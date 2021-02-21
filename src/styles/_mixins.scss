@@ -1,0 +1,35 @@
+@import "./vars";
+
+// display
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-none-center() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center-center() {
+  @include flex-none-center;
+  justify-content: center;
+}
+
+@mixin flex-between-center() {
+  @include flex-none-center;
+  justify-content: space-between;
+}
+
+// border
+@mixin border-none() {
+  border: none;
+}
+
+@mixin border-left($color: $Border, $size: 1px, $style: solid) {
+  border-left: $size $style $color;
+}
+
+@mixin border-right($color: $Border, $size: 1px, $style: solid) {
+  border-right: $size $style $color;
+}

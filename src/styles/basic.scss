@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+@import "./vars", "./mixins";
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @include flex-column;
+  min-height: 100vh;
+}
+
+button, input {
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+  background: none;
+  border: none;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 800;
+}
+
+.container {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.button {
+  cursor: pointer;
+  color: $Text;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid $Border;
+  padding: 10px 20px;
+}
