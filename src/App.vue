@@ -1,29 +1,55 @@
 <template>
   <header class="header">
     <div class="container header__container">
-      <button class="button header__button header__button_menu">Меню</button>
+      <button class="button header__button header__button_menu" @click="switchMenu">Меню</button>
 
       <LogoSecondary></LogoSecondary>
 
-      <button class="button header__button header__button_account">Войти</button>
+      <button class="button header__button header__button_account" @click="goToLogin">Войти</button>
     </div>
   </header>
 
-  <router-view/>
+  <main class="main">
+    <Menu :isCollapse="isCollapse"></Menu>
 
-<!--  <div id="nav">-->
-<!--    <router-link to="/">Landing</router-link> |-->
-<!--    <router-link to="/login">Login</router-link>-->
-<!--  </div>-->
+    <router-view/>
+  </main>
+
+  <footer class="footer">
+
+  </footer>
 </template>
 
 <script>
 import LogoSecondary from '@/components/svg/LogoSecondary.vue';
+import Menu from '@/components/app/Menu.vue';
 
 export default {
   name: 'App',
+
   components: {
     LogoSecondary,
+    Menu,
+  },
+
+  data: () => ({
+    isCollapse: true,
+  }),
+
+  methods: {
+    goToLogin() {
+      this.$router.push({ name: 'Login' });
+    },
+
+    switchMenu() {
+      this.isCollapse = !this.isCollapse;
+    },
+  },
+
+  watch: {
+    $route() {
+      this.isCollapse = true;
+    },
   },
 };
 </script>
@@ -32,8 +58,10 @@ export default {
 @import "./styles/vars", "./styles/mixins";
 
 .header {
+  z-index: 100;
   background: $Background;
   box-shadow: 0 5px 10px $Shadow;
+  position: relative;
 
   &__container {
     @include flex-between-center;
@@ -58,5 +86,9 @@ export default {
       background: $Background;
     }
   }
+}
+
+.main {
+  position: relative;
 }
 </style>

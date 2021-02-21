@@ -9,7 +9,7 @@ import Withdrawal from '@/views/Withdrawal.vue';
 const routes = [
   {
     path: '/account',
-    name: 'account',
+    name: 'Account',
     component: Account,
   },
   {
