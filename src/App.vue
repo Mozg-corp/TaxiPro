@@ -1,29 +1,61 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <header class="header">
+    <div class="container header__container">
+      <button class="button header__button header__button_menu">Меню</button>
+
+      <LogoSecondary></LogoSecondary>
+
+      <button class="button header__button header__button_account">Войти</button>
+    </div>
+  </header>
+
   <router-view/>
+
+<!--  <div id="nav">-->
+<!--    <router-link to="/">Landing</router-link> |-->
+<!--    <router-link to="/login">Login</router-link>-->
+<!--  </div>-->
 </template>
 
+<script>
+import LogoSecondary from '@/components/svg/LogoSecondary.vue';
+
+export default {
+  name: 'App',
+  components: {
+    LogoSecondary,
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "./styles/vars", "./styles/mixins";
 
-#nav {
-  padding: 30px;
+.header {
+  background: $Background;
+  box-shadow: 0 5px 10px $Shadow;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  &__container {
+    @include flex-between-center;
+    height: 60px;
+    padding: 0;
+  }
 
-    &.router-link-exact-active {
-      color: #42b983;
+  &__button {
+    @include border-none;
+    height: 100%;
+    min-width: auto;
+    font-weight: 500;
+    border-radius: 0;
+
+    &_menu {
+      text-transform: uppercase;
+    }
+
+    &_account {
+      @include border-left;
+      color: $Text;
+      background: $Background;
     }
   }
 }

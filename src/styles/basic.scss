@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 @import "./vars", "./mixins";
 
 * {
@@ -12,32 +12,76 @@
 body {
   @include flex-column;
   min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  color: $Text;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 button, input {
   font-family: "Montserrat", sans-serif;
+  color: $Text;
+  font-size: 14px;
+  font-weight: 400;
   outline: none;
   background: none;
   border: none;
 }
 
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+li {
+  list-style-type: none;
+}
+
 h1 {
   font-size: 32px;
-  line-height: 36px;
   font-weight: 800;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .container {
   width: 100%;
-  max-width: 768px;
+  min-width: 380px;
+  max-width: 540px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
 .button {
-  cursor: pointer;
-  color: $Text;
-  font-size: 14px;
-  font-weight: 400;
-  border: 1px solid $Border;
+  @include BrandSecondGradient;
+  min-width: 270px;
+  height: 46px;
+  color: white;
+  border-radius: 12px;
   padding: 10px 20px;
+}
+
+.list-item {
+  @include flex-none-center;
+  width: 100%;
+  font-weight: 300;
+  position: relative;
+  margin-left: 30px;
+
+  &:before {
+    @include absolute-left-center(-30px);
+    content: '';
+    width: 11px;
+    height: 11px;
+    background: $BrandSecond;
+    border-radius: 50%;
+    display: block;
+  }
+}
+
+.text {
+  font-weight: 300;
 }

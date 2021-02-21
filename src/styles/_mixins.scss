@@ -1,5 +1,11 @@
 @import "./vars";
 
+// color
+@mixin BrandSecondGradient() {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), $BrandSecond;
+  background-blend-mode: soft-light, normal;
+}
+
 // display
 @mixin flex-column() {
   display: flex;
@@ -19,6 +25,15 @@
 @mixin flex-between-center() {
   @include flex-none-center;
   justify-content: space-between;
+}
+
+// position
+@mixin absolute-left-center($left: 0) {
+  position: absolute;
+  margin: auto;
+  left: $left;
+  top: 0;
+  bottom: 0;
 }
 
 // border
