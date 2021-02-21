@@ -1,12 +1,8 @@
 import { createStore } from 'vuex';
+import storage from '@/store/storage';
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    storage,
   },
 });
