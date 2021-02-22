@@ -64,8 +64,6 @@ export default {
   }
 
   &__image {
-    overflow: hidden;
-
     &_car {
       height: 216px;
       position: relative;

@@ -47,6 +47,11 @@ h2 {
   font-weight: 700;
 }
 
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .container {
   width: 100%;
   min-width: 380px;
@@ -57,7 +62,7 @@ h2 {
 
 .button {
   @include BrandSecondGradient;
-  min-width: 270px;
+  max-width: 270px;
   height: 46px;
   color: white;
   border-radius: 12px;
@@ -66,7 +71,7 @@ h2 {
 
 .list-item {
   @include flex-none-center;
-  width: 100%;
+  width: calc(100% - 30px);
   font-weight: 300;
   position: relative;
   margin-left: 30px;
