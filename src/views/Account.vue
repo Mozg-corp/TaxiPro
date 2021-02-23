@@ -1,8 +1,6 @@
 <template>
-  <div class="account">
-    <div class="container account__container">
-      <h1>Личный кабинет</h1>
-    </div>
+  <div class="container account">
+    <h1>Личный кабинет</h1>
   </div>
 </template>
 
@@ -34,9 +32,7 @@ export default {
 @import "../styles/vars", "../styles/mixins";
 
 .account {
-  &__container {
-    @include flex-column;
-    padding-top: 44px;
-  }
+  @include flex-column;
+  padding-top: 44px;
 }
 </style>

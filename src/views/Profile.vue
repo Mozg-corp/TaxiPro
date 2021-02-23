@@ -1,8 +1,6 @@
 <template>
-  <div class="profile">
-    <div class="container profile__container">
-      <h1>Профиль пользователя</h1>
-    </div>
+  <div class="container profile">
+    <h1>Профиль пользователя</h1>
   </div>
 </template>
 
@@ -34,9 +32,7 @@ export default {
 @import "../styles/vars", "../styles/mixins";
 
 .profile {
-  &__container {
-    @include flex-column;
-    padding-top: 44px;
-  }
+  @include flex-column;
+  padding-top: 44px;
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
-  <div class="history">
-    <div class="container history__container">
-      <h1>История вывода средств</h1>
-    </div>
+  <div class="container history">
+    <h1>История вывода средств</h1>
   </div>
 </template>
 
@@ -34,9 +32,7 @@ export default {
 @import "../styles/vars", "../styles/mixins";
 
 .history {
-  &__container {
-    @include flex-column;
-    padding-top: 44px;
-  }
+  @include flex-column;
+  padding-top: 44px;
 }
 </style>
