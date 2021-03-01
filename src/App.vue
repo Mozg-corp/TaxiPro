@@ -20,7 +20,9 @@
   </footer>
 </template>
 
+<!--suppress JSAnnotator, JSUnusedGlobalSymbols -->
 <script>
+import { mapActions } from 'vuex';
 import LogoSecondary from '@/components/svg/LogoSecondary.vue';
 import Menu from '@/components/app/Menu.vue';
 
@@ -37,6 +39,10 @@ export default {
   }),
 
   methods: {
+    ...mapActions({
+      initAuth: 'authorization/init',
+    }),
+
     goToLogin() {
       this.$router.push({ name: 'Login' });
     },
@@ -50,6 +56,10 @@ export default {
     $route() {
       this.isCollapse = true;
     },
+  },
+
+  created() {
+    this.initAuth();
   },
 };
 </script>

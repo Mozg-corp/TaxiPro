@@ -1,8 +1,8 @@
 import { createStore } from 'vuex';
-import storage from '@/store/storage';
+import authorization from '@/store/authorization';
 
 export default createStore({
   modules: {
-    storage,
+    authorization,
   },
 });

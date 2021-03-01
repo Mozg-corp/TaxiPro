@@ -5,15 +5,17 @@ import mutations from './mutations';
 export default {
   namespaced: true,
   state: {
-    config: {
-      smsTimeout: 90000,
-    },
-    storage: {
-      updatedAt: 0,
-      token: null,
-      phone: null,
-      smsTimeLabel: 0,
-    },
+    // data
+    phone: null,
+    sms: null,
+    token: null,
+    user: null,
+    // special
+    error: null,
+    loading: false,
+    // timer
+    currentTime: Date.now(),
+    timer: null,
   },
   mutations,
   actions,
