@@ -34,7 +34,7 @@ const getPositionRegardingNumbers = (el) => {
 };
 
 /**
- * Устанавливает новую позицию курсора в маске телефона
+ * Устанавливает позицию курсора в маске телефона
  * @param el
  * @param position { number }
  */
@@ -62,6 +62,7 @@ const update = (el) => {
   /* eslint-enable no-param-reassign */
 };
 
+// noinspection JSUnusedGlobalSymbols
 export default {
   beforeMount(el) {
     update(el);
@@ -69,20 +70,15 @@ export default {
     el.addEventListener('keydown', (event) => {
       if (el.selectionStart !== el.selectionEnd) return;
 
-      const { value } = el;
-
       /* eslint-disable no-param-reassign */
       if (event.keyCode === 8) { // Backspace
-        while (el.selectionStart > 0 && !/^[0-9]$/.test(value[el.selectionStart - 1])) {
-          el.selectionStart -= 1;
-        }
-        el.selectionEnd = el.selectionStart;
+        while (el.selectionStart > 0
+          && !/^[0-9]$/.test(el.value[el.selectionStart - 1])) el.selectionStart -= 1;
       } else if (event.keyCode === 46) { // Delete
-        while (el.selectionEnd < value.length - 1 && !/^[0-9]$/.test(value[el.selectionEnd])) {
-          el.selectionEnd += 1;
-        }
-        el.selectionStart = el.selectionEnd;
+        while (el.selectionStart < el.value.length - 1
+          && !/^[0-9]$/.test(el.value[el.selectionStart])) el.selectionStart += 1;
       }
+      el.selectionEnd = el.selectionStart;
       /* eslint-enable no-param-reassign */
     });
 
