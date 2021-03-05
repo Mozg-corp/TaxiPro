@@ -7,28 +7,32 @@
       таксопарков
     </p>
 
-    <div class="landing__image landing__image_car">
-      <img src="@/assets/images/car.jpg" alt="car" />
-    </div>
+    <el-image class="landing__taxi" :src="imgTaxi">
+      <template #placeholder>
+        <div class="landing__taxi-slot">
+          Загрузка<span class="dot">...</span>
+        </div>
+      </template>
+      <template #error>
+        <div class="landing__taxi-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </template>
+    </el-image>
 
-    <button class="button landing__button landing__button_attempt" @click="goToLogin">
-      Попробовать
-    </button>
+    <el-button class="button landing__button landing__button_attempt"
+               @click="goToLogin">Попробовать</el-button>
 
-    <h2 class="landing__title landing__title_why">Почему ТаксиПро?</h2>
+    <h2 class="landing__reason-title">Почему ТаксиПро?</h2>
 
-    <ul class="landing__why-list">
-      <li class="list-item landing__why-list-item">
+    <ul class="landing__reason-list">
+      <li class="list-item landing__reason-item">
         Никаких процентов от заказа - только абонентская плата
       </li>
-      <li class="list-item landing__why-list-item">
-        Моментальные выплаты без комиссий</li>
-      <li class="list-item landing__why-list-item">Отсутствие скрытых платежей
-      </li>
-      <li class="list-item landing__why-list-item">
-        Защита личных данных
-      </li>
-      <li class="list-item landing__why-list-item">
+      <li class="list-item landing__reason-item">Моментальные выплаты без комиссий</li>
+      <li class="list-item landing__reason-item">Отсутствие скрытых платежей</li>
+      <li class="list-item landing__reason-item">Защита личных данных</li>
+      <li class="list-item landing__reason-item">
         Прямое подключение водителей к агрегаторам такси
       </li>
     </ul>
@@ -38,6 +42,10 @@
 <script>
 export default {
   name: 'Landing',
+
+  data: () => ({
+    imgTaxi: '/assets/images/car.jpg',
+  }),
 
   methods: {
     goToLogin() {
@@ -53,47 +61,73 @@ export default {
 
 .landing {
   @include flex-column;
-  padding-top: 44px;
+  padding-top: 2.75rem;
 
   &__button {
     margin: 0 auto;
 
     &_attempt {
-      margin-top: 56px;
+      margin-top: 3.5rem;
     }
   }
 
-  &__image {
-    &_car {
-      height: 216px;
-      position: relative;
-      margin: 20px -20px 0;
+  &__reason {
+    &-title {
+      margin-top: 4.875rem;
+    }
 
-      img {
-        height: 100%;
-        position: absolute;
-        left: min(-230px, max(-310px, calc(-310px + (100vw - 380px) / 2)));
+    &-list {
+      margin-top: 0.75rem;
+    }
+
+    &-item {
+      @include flex-none-center;
+      min-height: 2.25rem;
+      margin-top: 0.75rem;
+    }
+  }
+
+  &__taxi {
+    overflow: visible;
+    width: 100%;
+    height: 216px;
+    position: relative;
+    margin-top: 1.25rem;
+
+    &-slot {
+      @include flex-center-center;
+      width: 100%;
+      height: 100%;
+      color: $TextSecondary;
+      background: $Border;
+    }
+
+    .el-image__placeholder {
+      font-size: .875rem;
+    }
+
+    .el-image__error {
+      font-size: 1.875rem;
+    }
+
+    .el-image__inner {
+      width: 648px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+
+      @media (max-width: 768px) {
+        left: calc-size(-20.5, 0, 380, 768);
+      }
+
+      @media (max-width: 380px) {
+        left: -328px;
       }
     }
   }
 
   &__text {
-    margin-top: 36px;
-  }
-
-  &__title {
-    &_why {
-      margin-top: 78px;
-    }
-  }
-
-  &__why-list {
-    margin-top: 12px;
-
-    &-item {
-      min-height: 36px;
-      margin-top: 12px;
-    }
+    margin-top: 2.25rem;
   }
 }
 </style>
