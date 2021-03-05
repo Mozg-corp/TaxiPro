@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 @import "./vars", "./mixins";
 
-* {
+*, *:before, *:after {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -9,19 +9,23 @@
   margin: 0;
 }
 
+html {
+  font-size: $font-size;
+}
+
 body {
   @include flex-column;
-  min-height: 100vh;
+  height: 100vh;
   font-family: "Montserrat", sans-serif;
   color: $Text;
-  font-size: 14px;
+  font-size: .875rem;
   font-weight: 400;
 }
 
 button, input {
   font-family: "Montserrat", sans-serif;
   color: $Text;
-  font-size: 14px;
+  font-size: .875rem;
   font-weight: 400;
   outline: none;
   background: none;
@@ -34,11 +38,7 @@ button {
 }
 
 input {
-  padding: 8px 20px;
-
-  &::placeholder {
-    color: rgba($TextSecondary, 0.2);
-  }
+  padding: .5rem 1.25rem;
 }
 
 li {
@@ -46,55 +46,33 @@ li {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 800;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
 }
+
 
 .container {
   width: 100%;
   min-width: 380px;
-  max-width: 540px;
-  padding: 0 20px;
+  max-width: 768px;
+  padding: 0 3.75rem;
   margin: 0 auto;
-}
 
-.button {
-  @include BrandSecondGradient;
-  max-width: 270px;
-  height: 46px;
-  color: white;
-  border-radius: 12px;
-  padding: 10px 20px;
-}
-
-.list-item {
-  @include flex-none-center;
-  width: calc(100% - 30px);
-  font-weight: 300;
-  position: relative;
-  margin-left: 30px;
-
-  &:before {
-    @include absolute-left-center(-30px);
-    content: '';
-    width: 11px;
-    height: 11px;
-    background: $BrandSecond;
-    border-radius: 50%;
-    display: block;
+  @media (max-width: 768px) {
+    padding: 0 calc-size(1.25, 3.75, $min-site-width-num, $max-site-width-num);
   }
-}
 
-.text {
-  font-weight: 300;
+  @media (max-width: 380px) {
+    padding: 0 1.25rem;
+  }
 }

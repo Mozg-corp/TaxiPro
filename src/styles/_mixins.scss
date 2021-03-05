@@ -1,8 +1,12 @@
 @import "./vars";
 
+@function calc-size($min, $max, $width-min, $width-max) {
+  @return calc(#{$max + rem} - (#{$width-max + px} - 100vw) * #{($max - $min) * $font-size-num / ($width-max - $width-min)});
+}
+
 // color
-@mixin BrandSecondGradient() {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), $BrandSecond;
+@mixin BrandBlueGradient() {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), $BrandBlue;
   background-blend-mode: soft-light, normal;
 }
 
@@ -30,7 +34,7 @@
 // position
 @mixin absolute-top-center($top: 0) {
   position: absolute;
-  margin: auto;
+  margin: 0 auto;
   top: $top;
   left: 0;
   right: 0;
@@ -38,17 +42,13 @@
 
 @mixin absolute-left-center($left: 0) {
   position: absolute;
-  margin: auto;
+  margin: auto 0;
   left: $left;
   top: 0;
   bottom: 0;
 }
 
 // border
-@mixin border-none() {
-  border: none;
-}
-
 @mixin border-left($color: $Border, $size: 1px, $style: solid) {
   border-left: $size $style $color;
 }

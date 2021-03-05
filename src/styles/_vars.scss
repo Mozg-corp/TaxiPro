@@ -1,11 +1,24 @@
-// colors
-$BrandFirst: #FFCC00;
-$BrandFirstSecondary: #FBBB05;
-$BrandSecond: #48B5E2;
-$BrandSecondSecondary: #E2F7FF;
+// palette
+$BrandYellow: #FFCC00;
+$BrandYellowSecondary: #FBBB05;
+$BrandBlue: #48B5E2;
+$BrandBlueSecondary: #E2F7FF;
+$Black: #1D1D1D;
+$BlackSecondary: #4D4D4D;
 
+// colors
 $Background: white;
-$Border: rgba(black, 0.05);
-$Shadow: rgba(black, 0.05);
-$Text: #1D1D1D;
-$TextSecondary: #4D4D4D;
+$Border: rgba(167, 156, 156, .1);
+$Text: $Black;
+$TextSecondary: $BlackSecondary;
+
+// sizes
+$font-size: 16px;
+$font-size-num: 16;
+$min-site-width: 380px;
+$min-site-width-num: 380;
+$max-site-width: 768px;
+$max-site-width-num: 768;
+
+// properties
+$Shadow: 0px 5px 10px $Border;
