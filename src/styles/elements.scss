@@ -1,0 +1,5 @@
+@import "./vars", "./functions", "./mixins";
+
+.el-button--default {
+  color: $Text;
+}

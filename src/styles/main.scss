@@ -1,0 +1,75 @@
+@import "./vars", "./functions", "./mixins";
+
+#app, .main {
+  @include flex-column;
+  flex-grow: 1;
+}
+
+.container {
+  width: 100%;
+  min-width: 380px;
+  max-width: 768px;
+  padding: 24px 60px 0;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 24px calc-size(20, 60, $min-site-width-num, $max-site-width-num) 0;
+  }
+
+  @media (max-width: 380px) {
+    padding: 24px 20px 0;
+  }
+}
+
+.button {
+  width: 360px;
+  height: 45px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+
+  @media (max-width: 768px) {
+    width: calc-size(270, 360, $min-site-width-num, $max-site-width-num);
+  }
+
+  @media (max-width: 380px) {
+    width: 270px;
+  }
+
+  &, &:hover, &:focus, &:active {
+    @include BrandBlueGradient;
+    color: white;
+  }
+
+  &:hover, &:focus {
+    filter: contrast(1.15);
+  }
+
+  &:active {
+    filter: contrast(0.85);
+  }
+
+  &[disabled], &[disabled]:hover {
+    filter: none;
+    color: white;
+    background: $Silver;
+  }
+}
+
+.list-item {
+  width: calc(100% - 30px);
+  font-weight: 300;
+  position: relative;
+  margin-left: 30px;
+
+  &:before {
+    @include absolute-left-center(-30px);
+    content: '';
+    width: 11px;
+    height: 11px;
+    background: $BrandBlue;
+    border-radius: 50%;
+    display: block;
+  }
+}

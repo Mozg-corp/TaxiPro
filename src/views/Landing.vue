@@ -2,7 +2,7 @@
   <div class="container landing">
     <h1 class="landing__caption">Выгода с ТаксиПро!</h1>
 
-    <p class="text landing__text">
+    <p class="landing__text">
       ТаксиПро - это платформа для подключения к такси, которая помогает экономить на комиссии
       таксопарков
     </p>
@@ -57,23 +57,24 @@ export default {
 
 <!--suppress CssUnknownTarget -->
 <style lang="scss">
-@import "../styles/vars", "../styles/mixins";
+@import "../styles/vars", "../styles/functions", "../styles/mixins";
 
 .landing {
   @include flex-column;
-  padding-top: 2.75rem;
+  min-height: 100%;
+  padding-top: 44px;
 
   &__button {
     margin: 0 auto;
 
     &_attempt {
-      margin-top: 3.5rem;
+      margin-top: 56px;
     }
   }
 
   &__reason {
     &-title {
-      margin-top: 4.875rem;
+      margin-top: 78px;
     }
 
     &-list {
@@ -92,7 +93,7 @@ export default {
     width: 100%;
     height: 216px;
     position: relative;
-    margin-top: 1.25rem;
+    margin-top: 18px;
 
     &-slot {
       @include flex-center-center;
@@ -117,7 +118,7 @@ export default {
       left: 0;
 
       @media (max-width: 768px) {
-        left: calc-size(-20.5, 0, 380, 768);
+        left: calc-size(-328, 0, 380, 768);
       }
 
       @media (max-width: 380px) {
@@ -127,7 +128,7 @@ export default {
   }
 
   &__text {
-    margin-top: 2.25rem;
+    margin-top: 34px;
   }
 }
 </style>

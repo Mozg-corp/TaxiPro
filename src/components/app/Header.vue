@@ -1,12 +1,12 @@
 <template>
   <header class="header">
     <div class="container header__container">
-      <el-button class="header__button header__button_menu" plain
+      <el-button class="header__button header__button_menu" plain v-show="isLogged"
                  @click="switchMenu">Меню</el-button>
 
-      <v-logo-secondary></v-logo-secondary>
+      <v-logo-secondary class="header__logo"></v-logo-secondary>
 
-      <el-button class="header__button header__button_signin" plain
+      <el-button class="header__button header__button_signin" plain v-show="!isLogged"
                  @click="goToLogin">Войти</el-button>
 
       <v-menu :isCollapse="isCollapse"></v-menu>
@@ -16,7 +16,7 @@
 
 <!--suppress JSAnnotator, JSUnusedGlobalSymbols -->
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import vLogoSecondary from '@/components/svg/LogoSecondary.vue';
 import vMenu from '@/components/app/Menu.vue';
 
@@ -33,10 +33,6 @@ export default {
   }),
 
   methods: {
-    ...mapActions({
-      initAuth: 'authorization/init',
-    }),
-
     goToLogin() {
       this.$router.push({ name: 'Login' });
     },
@@ -46,15 +42,15 @@ export default {
     },
   },
 
-  watch: {
-    $route() {
-      this.isCollapse = true;
-    },
+  computed: {
+    ...mapGetters({
+      isLogged: 'authorization/isLogged',
+    }),
   },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../../styles/vars", "../../styles/mixins";
 
 .header {
@@ -71,19 +67,22 @@ export default {
 
     &_menu {
       text-transform: uppercase;
-      border-right-color: $Border;
     }
 
-    &_signin {
+    &_menu, &_signin {
       border-left-color: $Border;
     }
   }
 
   &__container {
-    @include flex-between-center;
+    @include flex-right-center;
     height: 60px;
     padding: 0;
     position: relative;
+  }
+
+  &__logo {
+    @include absolute-center;
   }
 }
 </style>

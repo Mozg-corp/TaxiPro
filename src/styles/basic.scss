@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
-@import "./vars", "./mixins";
+@import "./vars", "./functions", "./mixins";
 
 *, *:before, *:after {
   -webkit-font-smoothing: antialiased;
@@ -55,23 +55,12 @@ h2 {
   font-weight: 700;
 }
 
-h4 {
+h3 {
   font-size: 1.125rem;
   font-weight: 500;
 }
 
-.container {
-  width: 100%;
-  min-width: 380px;
-  max-width: 768px;
-  padding: 0 3.75rem;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: 0 calc-size(1.25, 3.75, $min-site-width-num, $max-site-width-num);
-  }
-
-  @media (max-width: 380px) {
-    padding: 0 1.25rem;
-  }
+p {
+  font-size: 0.875rem;
+  font-weight: 400;
 }

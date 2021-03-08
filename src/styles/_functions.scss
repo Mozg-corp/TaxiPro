@@ -1,0 +1,9 @@
+@import "./vars";
+
+@function calc-size($min, $max, $width-min, $width-max, $type: px) {
+  $factor: ($max - $min) / ($width-max - $width-min);
+  @if ($type == rem) {
+    $factor: $font-size-num * ($max - $min) / ($width-max - $width-min);
+  }
+  @return calc(#{$max + $type} - (#{$width-max + px} - 100vw) * #{$factor});
+}

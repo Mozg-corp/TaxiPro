@@ -1,9 +1,5 @@
 @import "./vars";
 
-@function calc-size($min, $max, $width-min, $width-max) {
-  @return calc(#{$max + rem} - (#{$width-max + px} - 100vw) * #{($max - $min) * $font-size-num / ($width-max - $width-min)});
-}
-
 // color
 @mixin BrandBlueGradient() {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), $BrandBlue;
@@ -21,9 +17,19 @@
   align-items: center;
 }
 
+@mixin flex-center-none() {
+  display: flex;
+  justify-content: center;
+}
+
 @mixin flex-center-center() {
   @include flex-none-center;
   justify-content: center;
+}
+
+@mixin flex-right-center() {
+  @include flex-none-center;
+  justify-content: flex-end;
 }
 
 @mixin flex-between-center() {
@@ -32,6 +38,15 @@
 }
 
 // position
+@mixin absolute-center($top: 0, $left: 0, $bottom: $top, $right: $left) {
+  position: absolute;
+  margin: auto;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
 @mixin absolute-top-center($top: 0) {
   position: absolute;
   margin: 0 auto;

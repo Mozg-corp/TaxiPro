@@ -5,10 +5,12 @@ $BrandBlue: #48B5E2;
 $BrandBlueSecondary: #E2F7FF;
 $Black: #1D1D1D;
 $BlackSecondary: #4D4D4D;
+$Red: #E30F0F;
+$Silver: #D5D8DD;
 
 // colors
 $Background: white;
-$Border: rgba(167, 156, 156, .1);
+$Border: $Silver;
 $Text: $Black;
 $TextSecondary: $BlackSecondary;
 
@@ -21,4 +23,4 @@ $max-site-width: 768px;
 $max-site-width-num: 768;
 
 // properties
-$Shadow: 0px 5px 10px $Border;
+$Shadow: 0px 5px 10px rgba(167, 156, 156, 0.1);
