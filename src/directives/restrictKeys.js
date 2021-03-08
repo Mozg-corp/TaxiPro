@@ -57,7 +57,7 @@ const isKeyboardShortcut = (keyCode, ctrlKey, keys = [65, 67, 88]) => {
 const isSpecialKey = (keyCode) => Boolean(specialKeys[keyCode]);
 
 export default {
-  mounted(el, binding) {
+  created(el, binding) {
     const { modifiers } = binding;
 
     el.addEventListener('keydown', (event) => {

@@ -8,8 +8,15 @@ const MT = {
 /**
  * @param state
  */
+const decAttemptsForCode = (state) => {
+  if (state.sms) state.sms.attempts -= 1;
+};
+
+/**
+ * @param state
+ */
 const setCurrentTime = (state) => {
-  state.currentTime = Date.now();
+  state.currentTime = Math.floor(Date.now() / 1000);
 };
 
 /**
@@ -24,12 +31,13 @@ const setPhone = (state, phone) => {
  * @param state
  * @param data {{ requestTime: number, deadline: number, resubmitTime: number }}
  */
-const setSMS = (state, data) => {
+const setSms = (state, data) => {
   if (data) {
-    const NOW = Date.now();
-    const DEADLINE = 60000;
-    const RESUBMIT_TIME = 90000;
+    const NOW = Math.floor(Date.now() / 1000);
+    const DEADLINE = 180;
+    const RESUBMIT_TIME = 90;
     state.sms = {
+      attempts: 3,
       requestTime: data.requestTime ?? NOW,
       deadline: data.deadline ?? NOW + DEADLINE,
       resubmitTime: data.resubmitTime ?? NOW + RESUBMIT_TIME,
@@ -87,12 +95,13 @@ const setResponse = (state) => {
 };
 
 export default {
+  [MT.DEC_ATTEMPTS_FOR_CODE]: decAttemptsForCode,
   [MT.SET_CURRENT_TIME]: setCurrentTime,
   [MT.SET_ERROR]: setError,
   [MT.SET_LOADING]: setLoading,
   [MT.SET_PHONE]: setPhone,
   [MT.SET_RESPONSE]: setResponse,
-  [MT.SET_SMS]: setSMS,
+  [MT.SET_SMS]: setSms,
   [MT.SET_TIMER]: setTimer,
   [MT.SET_TOKEN]: setToken,
   [MT.SET_USER]: setUser,

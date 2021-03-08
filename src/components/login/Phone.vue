@@ -1,14 +1,17 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <template>
   <div class="login-phone">
     <span class="login-phone__prefix">+7</span>
 
-    <input class="login-phone__input" v-restrict.numbers v-phone-mask>
+    <input class="login-phone__input" v-restrict.numbers v-phone-mask
+           @input="$emit('update:phone', $event.target.dataset.number)">
   </div>
 </template>
 
+<!--suppress JSAnnotator -->
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import phoneMask from '@/directives/phoneMask';
+import { mapGetters } from 'vuex';
+import phoneMask, { convertNumberToPhone } from '@/directives/phoneMask';
 import restrict from '@/directives/restrictKeys';
 
 export default {
@@ -19,20 +22,18 @@ export default {
     restrict,
   },
 
-  date: () => ({
-    //
-  }),
-
-  methods: {
-    ...mapActions({
-      //
+  computed: {
+    ...mapGetters({
+      getPhone: 'authorization/getPhone',
     }),
   },
 
-  computed: {
-    ...mapGetters({
-      //
-    }),
+  mounted() {
+    const el = this.$el.querySelector('.login-phone__input');
+    el.dataset.number = this.getPhone.substr(1);
+    el.dataset.phone = convertNumberToPhone(el.dataset.number);
+    el.value = el.dataset.phone;
+    this.$emit('update:phone', el.dataset.number);
   },
 };
 </script>
@@ -41,21 +42,26 @@ export default {
 @import "../../styles/vars", "../../styles/mixins";
 
 .login-phone {
-  margin-top: 10px;
+  margin-top: .625rem;
+  border-bottom: 1px solid $BrandBlue;
 
   &__input, &__prefix {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 500;
   }
 
   &__input {
     width: 264px;
-    font-family: "Montserrat", monospace;
-    padding: 8px 10px;
+    font-family: "Montserrat", sans-serif;
+    padding: .5rem .625rem;
+
+    &[data-number=""]:not(:focus) {
+      color: $Silver;
+    }
   }
 
   &__prefix {
-    padding-left: 20px;
+    padding-left: 1.25rem
   }
 }
 </style>

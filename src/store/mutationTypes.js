@@ -5,6 +5,7 @@ export const basic = {
 };
 
 export const authorization = {
+  DEC_ATTEMPTS_FOR_CODE: 'DEC_ATTEMPTS_FOR_CODE',
   SET_CURRENT_TIME: 'SET_CURRENT_TIME',
   SET_PHONE: 'SET_PHONE',
   SET_SMS: 'SET_SMS',

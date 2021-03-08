@@ -3,7 +3,7 @@
  * @param number { string }
  * @returns { string }
  */
-const convertNumberToPhone = (number) => {
+export const convertNumberToPhone = (number) => {
   const code = number.substring(0, 3).padEnd(3, '_');
   const numbPart1 = number.substring(3, 6).padEnd(3, '_');
   const numbPart2 = number.substring(6, 8).padEnd(2, '_');
@@ -16,9 +16,9 @@ const convertNumberToPhone = (number) => {
  * @param phone { string }
  * @returns { string }
  */
-const convertPhoneToNumber = (phone) => {
+export const convertPhoneToNumber = (phone) => {
   const numbers = phone.match(/[0-9]/g);
-  return numbers ? numbers.join('') : '';
+  return (numbers ? numbers.join('') : '').slice(0, 10);
 };
 
 /**
@@ -64,7 +64,7 @@ const update = (el) => {
 
 // noinspection JSUnusedGlobalSymbols
 export default {
-  beforeMount(el) {
+  created(el) {
     update(el);
 
     el.addEventListener('keydown', (event) => {

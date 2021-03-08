@@ -1,12 +1,12 @@
 /**
  * Конвертирует время в строку формата 'm:ss'
- * @param time
- * @returns {string}
+ * @param time { number } - в секундах
+ * @returns { string }
  */
 export const convertTimeToMinutesStr = (time) => {
-  const s = Math.ceil((time % 60000) / 1000);
-  const m = Math.floor(time / 60000);
-  return `${m}:${s.padStart(2, '0')}`;
+  const s = Math.ceil(time % 60);
+  const m = Math.floor(time / 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
 };
 
 /**
@@ -23,9 +23,25 @@ export const convertToNumber = (value) => {
 };
 
 /**
+ * Возвращает соответствующую числу форму слова
+ * @param numb { number }
+ * @param forms { string }
+ * @returns {*}
+ */
+export const declOfNum = (numb, forms) => {
+  const formsList = forms.split(',');
+  const n = Math.abs(numb) % 100;
+  const nd = n % 10;
+  if (n > 10 && n < 20) return formsList[2] ?? formsList[0];
+  if (nd > 1 && nd < 5) return formsList[1] ?? formsList[0];
+  if (nd === 1) return formsList[0];
+  return formsList[2] ?? formsList[0];
+};
+
+/**
  * Возвращает данные из локального хранилища
  * @param key { string }
- * @returns { * }
+ * @returns {*}
  */
 export const getFromStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 
@@ -41,6 +57,7 @@ export const setToStorage = (key, value) => window.localStorage.setItem(
 export default {
   convertTimeToMinutesStr,
   convertToNumber,
+  declOfNum,
   getFromStorage,
   setToStorage,
 };

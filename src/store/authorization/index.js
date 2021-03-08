@@ -14,7 +14,7 @@ export default {
     error: null,
     loading: false,
     // timer
-    currentTime: Date.now(),
+    currentTime: Math.floor(Date.now() / 1000),
     timer: null,
   },
   mutations,
