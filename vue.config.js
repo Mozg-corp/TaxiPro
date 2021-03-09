@@ -5,28 +5,28 @@ module.exports = {
     https: true,
     proxy: {
       '^/api*': {
-        "target": serverUrl,
+        target: serverUrl,
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
       },
       '^/auth*': {
-        "target": serverUrl,
+        target: serverUrl,
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
       },
       '^/sms*': {
-        "target": serverUrl,
+        target: serverUrl,
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
       },
       '^/img*': {
-        "target": serverUrl,
+        target: serverUrl,
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
       },
     },
   },
-  'transpileDependencies': [
+  transpileDependencies: [
     'vuetify',
   ],
 };

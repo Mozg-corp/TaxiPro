@@ -1,11 +1,12 @@
 <template>
   <div class="container profile">
-    <h1>Профиль пользователя</h1>
+    <Step1></Step1>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Step1 from '@/components/profile/Step1';
 
 export default {
   name: 'Profile',
@@ -13,6 +14,10 @@ export default {
   date: () => ({
     //
   }),
+
+  components: {
+    Step1,
+  },
 
   methods: {
     ...mapActions({
@@ -33,6 +38,5 @@ export default {
 
 .profile {
   @include flex-column;
-  padding-top: 44px;
 }
 </style>

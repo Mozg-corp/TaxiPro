@@ -20,6 +20,24 @@ export default {
     PhoneForm,
   },
 
+  date: () => ({
+    //
+  }),
+  methods: {
+    ...mapActions({
+      sendPhone: 'authorization/sendPhone',
+      sendCode: 'authorization/sendCode',
+    }),
+
+    sendPhoneHandler() {
+      this.sendPhone(79991239999);
+    },
+
+    sendCodeHandler() {
+      this.sendCode('0000');
+    },
+  },
+
   computed: {
     ...mapGetters({
       getSms: 'authorization/getSms',
