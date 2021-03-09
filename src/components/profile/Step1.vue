@@ -30,6 +30,7 @@
       </ul>
     </div>
     <div class="tariffs">
+      <input type="radio" name="direction" id="start" checked><label for="start">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -59,6 +60,8 @@
           </div>
         </div>
       </div>
+    </label>
+      <input type="radio" name="direction" id="comfort"><label for="comfort">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -88,6 +91,8 @@
           </div>
         </div>
       </div>
+    </label>
+      <input type="radio" name="direction" id="premium"><label for="premium">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -117,6 +122,7 @@
           </div>
         </div>
       </div>
+    </label>
     </div>
     <div class="btn_step">
       <button class="button">Выбрать тариф</button>
@@ -153,6 +159,39 @@ export default {
 .tariff{
   min-width: 350px;
   margin: 3px;
+}
+input{
+  display:none;
+}
+#start:checked + label .tariff .tariff__block .cardTariff {
+  background: #48B5E2;
+  color: #fff;
+}
+#start:checked + label .tariff .tariff__block .cardTariff .cardTariff__header {
+  color: #fff;
+}
+#start:checked + label .tariff .tariff__block .cardTariff .cardTariff__circle {
+  background: #fff;
+}
+#comfort:checked + label .tariff .tariff__block .cardTariff {
+  background: #48B5E2;
+  color: #fff;
+}
+#comfort:checked + label .tariff .tariff__block .cardTariff .cardTariff__header {
+  color: #fff;
+}
+#comfort:checked + label .tariff .tariff__block .cardTariff .cardTariff__circle {
+  background: #fff;
+}
+#premium:checked + label .tariff .tariff__block .cardTariff {
+  background: #48B5E2;
+  color: #fff;
+}
+#premium:checked + label .tariff .tariff__block .cardTariff .cardTariff__header {
+  color: #fff;
+}
+#premium:checked + label .tariff .tariff__block .cardTariff .cardTariff__circle {
+  background: #fff;
 }
 .cardTariff {
   background: #FFFFFF;
