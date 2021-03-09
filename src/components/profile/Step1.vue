@@ -30,7 +30,7 @@
       </ul>
     </div>
     <div class="tariffs">
-      <input type="radio" name="direction" id="start" checked><label for="start">
+      <input type="radio" name="direction" id="start" v-model="tariffName" value="Старт" checked><label for="start">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -61,7 +61,7 @@
         </div>
       </div>
     </label>
-      <input type="radio" name="direction" id="comfort"><label for="comfort">
+      <input type="radio" name="direction" id="comfort" v-model="tariffName" value="Комфорт"><label for="comfort">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -92,7 +92,7 @@
         </div>
       </div>
     </label>
-      <input type="radio" name="direction" id="premium"><label for="premium">
+      <input type="radio" name="direction" id="premium" v-model="tariffName" value="Премиум"><label for="premium">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -125,7 +125,7 @@
     </label>
     </div>
     <div class="btn_step">
-      <button class="button">Выбрать тариф</button>
+      <button class="button">Выбрать тариф {{ tariffName }}</button>
     </div>
   </div>
 </template>
@@ -133,6 +133,11 @@
 <script>
 export default {
   name: 'Step1',
+  data() {
+    return {
+      tariffName: 'Старт',
+    };
+  },
 };
 </script>
 
