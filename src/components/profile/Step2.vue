@@ -1,0 +1,129 @@
+<template>
+  <div class="card">
+    <div class="stepNumber">
+      <div class="stepNumber__text">
+        Шаг <strong>2</strong>/5
+      </div>
+    </div>
+    <div class="choiceTaxi">
+      <h2 class="choiceTaxi__header">Выберите агрегаторы такси через которые вы будите работать</h2>
+      <div class="choiceTaxi__nameAgregators">
+        <input type="checkbox" id="gett" v-model="agregators" value="gett">
+        <label for="gett">
+          <div class="choiceTaxi__block">
+            <div class="agregator">
+              <div class="agregator__circle"></div>
+              <img class="agregator__img" src="/assets/images/step2/Gett.png" alt="gett">
+            </div>
+          </div>
+        </label>
+        <input type="checkbox" id="uber" v-model="agregators" value="uber">
+        <label for="uber">
+        <div class="choiceTaxi__block">
+          <div class="agregator">
+            <div class="agregator__circle"></div>
+            <img class="agregator__img" src="/assets/images/step2/uber.jpeg" alt="uber">
+          </div>
+        </div>
+        </label>
+        <input type="checkbox" id="yandexTaxi" v-model="agregators" value="yandexTaxi">
+        <label for="yandexTaxi">
+        <div class="choiceTaxi__block">
+          <div class="agregator">
+            <div class="agregator__circle"></div>
+            <img class="agregator__img" src="/assets/images/step2/ситимобил.png" alt="ситимобил">
+          </div>
+        </div>
+        </label>
+        <input type="checkbox" id="citymobile" v-model="agregators" value="citymobile">
+        <label for="citymobile">
+        <div class="choiceTaxi__block">
+          <div class="agregator">
+            <div class="agregator__circle"></div>
+            <img class="agregator__img" src="/assets/images/step2/ЯТакси.jpeg" alt="Яндекс Такси">
+          </div>
+        </div>
+        </label>
+      </div>
+    </div>
+    <div class="btn_step">
+      <button :disabled="isEmpty" class="button">Выбрать</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Step2',
+  data() {
+    return {
+      agregators: [],
+    };
+  },
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    isEmpty() {
+      // eslint-disable-next-line eqeqeq
+      if (this.agregators.length == 0) {
+        return true;
+      }
+      return false;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.choiceTaxi {
+  padding: 20px;
+  &__header {
+    padding-bottom: 30px;
+  }
+}
+.agregator {
+  border-radius: 20px;
+  border: 1px solid #C4C4C4;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  cursor: pointer;
+  &__circle {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #E1E1E1;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
+  &__img {
+    height: 200px;
+  }
+}
+#gett:checked + label .choiceTaxi__block .agregator {
+  border: 2px solid #48B5E2;
+}
+#gett:checked + label .choiceTaxi__block .agregator .agregator__circle {
+  background: #48B5E2;
+}
+#uber:checked + label .choiceTaxi__block .agregator {
+  border: 2px solid #48B5E2;
+}
+#uber:checked + label .choiceTaxi__block .agregator .agregator__circle {
+  background: #48B5E2;
+}
+#yandexTaxi:checked + label .choiceTaxi__block .agregator {
+  border: 2px solid #48B5E2;
+}
+#yandexTaxi:checked + label .choiceTaxi__block .agregator .agregator__circle {
+  background: #48B5E2;
+}
+#citymobile:checked + label .choiceTaxi__block .agregator {
+  border: 2px solid #48B5E2;
+}
+#citymobile:checked + label .choiceTaxi__block .agregator .agregator__circle {
+  background: #48B5E2;
+}
+</style>
