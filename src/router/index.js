@@ -5,6 +5,16 @@ import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
 import Withdrawal from '@/views/Withdrawal.vue';
+// eslint-disable-next-line import/extensions
+import Step1 from '@/components/profile/Step1';
+// eslint-disable-next-line import/extensions
+import Step2 from '@/components/profile/Step2';
+// eslint-disable-next-line import/extensions
+import Step3 from '@/components/profile/Step3';
+// eslint-disable-next-line import/extensions
+import Step4 from '@/components/profile/Step4';
+// eslint-disable-next-line import/extensions
+import Step5 from '@/components/profile/Step5';
 
 const routes = [
   {
@@ -26,6 +36,33 @@ const routes = [
     path: '/account/profile',
     name: 'Profile',
     component: Profile,
+    children: [
+      {
+        path: '/account/profile/step-1',
+        name: 'Step1',
+        component: Step1,
+      },
+      {
+        path: '/account/profile/step-2',
+        name: 'Step2',
+        component: Step2,
+      },
+      {
+        path: '/account/profile/step-3',
+        name: 'Step3',
+        component: Step3,
+      },
+      {
+        path: '/account/profile/step-4',
+        name: 'Step4',
+        component: Step4,
+      },
+      {
+        path: '/account/profile/step-5',
+        name: 'Step5',
+        component: Step5,
+      },
+    ],
   },
   {
     path: '/account/withdrawal',

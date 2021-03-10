@@ -8,7 +8,7 @@
     <div class="choiceTaxi">
       <h2 class="choiceTaxi__header">Выберите агрегаторы такси через которые вы будите работать</h2>
       <div class="choiceTaxi__nameAgregators">
-        <input type="checkbox" id="gett" v-model="agregators" value="gett">
+        <input class="inputNone" type="checkbox" id="gett" v-model="agregators" value="gett">
         <label for="gett">
           <div class="choiceTaxi__block">
             <div class="agregator">
@@ -17,7 +17,7 @@
             </div>
           </div>
         </label>
-        <input type="checkbox" id="uber" v-model="agregators" value="uber">
+        <input class="inputNone" type="checkbox" id="uber" v-model="agregators" value="uber">
         <label for="uber">
         <div class="choiceTaxi__block">
           <div class="agregator">
@@ -26,7 +26,7 @@
           </div>
         </div>
         </label>
-        <input type="checkbox" id="yandexTaxi" v-model="agregators" value="yandexTaxi">
+        <input class="inputNone" type="checkbox" id="yandexTaxi" v-model="agregators" value="yandexTaxi">
         <label for="yandexTaxi">
         <div class="choiceTaxi__block">
           <div class="agregator">
@@ -35,7 +35,7 @@
           </div>
         </div>
         </label>
-        <input type="checkbox" id="citymobile" v-model="agregators" value="citymobile">
+        <input class="inputNone" type="checkbox" id="citymobile" v-model="agregators" value="citymobile">
         <label for="citymobile">
         <div class="choiceTaxi__block">
           <div class="agregator">
@@ -47,7 +47,9 @@
       </div>
     </div>
     <div class="btn_step">
-      <button :disabled="isEmpty" class="button">Выбрать</button>
+      <router-link class="routerLink" :to="{ name: 'Step3' }">
+        <button :disabled="isEmpty" class="button routerLink">Выбрать</button>
+      </router-link>
     </div>
   </div>
 </template>

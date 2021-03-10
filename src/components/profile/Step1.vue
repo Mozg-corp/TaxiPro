@@ -30,7 +30,7 @@
       </ul>
     </div>
     <div class="tariffs">
-      <input type="radio" name="direction" id="start" v-model="tariffName" value="Старт" checked><label for="start">
+      <input class="inputNone" type="radio" name="direction" id="start" v-model="tariffName" value="Старт" checked><label for="start">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -61,7 +61,7 @@
         </div>
       </div>
     </label>
-      <input type="radio" name="direction" id="comfort" v-model="tariffName" value="Комфорт"><label for="comfort">
+      <input class="inputNone" type="radio" name="direction" id="comfort" v-model="tariffName" value="Комфорт"><label for="comfort">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -92,7 +92,7 @@
         </div>
       </div>
     </label>
-      <input type="radio" name="direction" id="premium" v-model="tariffName" value="Премиум"><label for="premium">
+      <input class="inputNone" type="radio" name="direction" id="premium" v-model="tariffName" value="Премиум"><label for="premium">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -125,7 +125,9 @@
     </label>
     </div>
     <div class="btn_step">
-      <button class="button">Выбрать тариф {{ tariffName }}</button>
+      <router-link :to="{ name: 'Step2' }" class="button routerLink">
+        Выбрать тариф {{ tariffName }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -165,7 +167,7 @@ export default {
   min-width: 350px;
   margin: 3px;
 }
-input{
+.inputNone{
   display:none;
 }
 #start:checked + label .tariff .tariff__block .cardTariff {
@@ -244,7 +246,6 @@ input{
 
 .btn_step {
   text-align: center;
-  margin-top: 40px;
   margin-bottom: 40px;
 }
 
