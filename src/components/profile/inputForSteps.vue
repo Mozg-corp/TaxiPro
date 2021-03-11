@@ -1,14 +1,28 @@
 <template>
 <div class="inputForSteps">
   <label class="inputForSteps__label" :for="id">{{ labelText }}</label>
-  <input class="inputForSteps__input" type="text" :id="id" :placeholder="placeholder">
+  <input class="inputForSteps__input"
+         type="text"
+         :id="id"
+         :placeholder="placeholder"
+         v-model="inputBody"
+  >
 </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      inputBody: '',
+    };
+  },
   name: 'inputForSteps',
-  props: ['id', 'labelText', 'placeholder'],
+  props: {
+    id: String,
+    labelText: String,
+    placeholder: String,
+  },
 };
 </script>
 
@@ -28,6 +42,9 @@ export default {
     border: 1px solid #000000;
     border-radius: 6px;
     box-sizing: border-box;
+  }
+  &__correct {
+    border: 1px solid blue;
   }
 }
 </style>
