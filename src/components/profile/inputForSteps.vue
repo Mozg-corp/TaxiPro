@@ -19,9 +19,21 @@ export default {
   },
   name: 'inputForSteps',
   props: {
+    key: Number,
     id: String,
     labelText: String,
     placeholder: String,
+  },
+  watch: {
+    inputBody() {
+      console.log(this.id)
+      let el = document.getElementById(this.id)
+      if (this.inputBody && this.inputBody.length > 1) {
+        el.classList.add("inputForSteps__correct")
+      } else {
+        el.classList.remove("inputForSteps__correct")
+      }
+    }
   },
 };
 </script>
