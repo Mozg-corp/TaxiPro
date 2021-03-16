@@ -196,10 +196,14 @@ export default {
       return this.birthday && this.birthday.length === 10 && this.regBirthday(this.birthday);
     },
     isValidPassportNumbers() {
-      return this.passportNumber && this.passportNumber.length > 9 && this.regPassportNumber(this.passportNumber);
+      return this.passportNumber
+        && this.passportNumber.length > 9
+        && this.regPassportNumber(this.passportNumber);
     },
     isValidPassportWhoGive() {
-      return this.passportWhoGive && this.passportWhoGive.length > 14 && this.regPassportWhoGive(this.passportWhoGive);
+      return this.passportWhoGive
+        && this.passportWhoGive.length > 14
+        && this.regPassportWhoGive(this.passportWhoGive);
     },
     isValidPassportWhenGive() {
       return this.passportWhenGive
