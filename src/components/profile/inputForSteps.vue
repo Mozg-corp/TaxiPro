@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -18,14 +19,10 @@ export default {
     };
   },
   name: 'inputForSteps',
-  props: {
-    key: Number,
-    id: String,
-    labelText: String,
-    placeholder: String,
-  },
-  watch: {
-    inputBody() {
+  props: ['id','labelText','placeholder'],
+
+  methods: {
+    input() {
       console.log(this.id)
       let el = document.getElementById(this.id)
       if (this.inputBody && this.inputBody.length > 1) {
