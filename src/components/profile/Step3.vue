@@ -29,7 +29,8 @@
                  :placeholder="data[1].placeholder"
                  v-model="name"
           >
-        </div><div class="inputForSteps">
+        </div>
+        <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[2].id">{{ data[2].labelText }}</label>
         <input class="inputForSteps__input"
                :class="{'inputForSteps__correct': isValidPatronymic}"
@@ -38,7 +39,8 @@
                :placeholder="data[2].placeholder"
                v-model="patronymic"
         >
-      </div><div class="inputForSteps">
+      </div>
+        <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[3].id">{{ data[3].labelText }}</label>
         <input class="inputForSteps__input"
                :class="{'inputForSteps__correct': isValidBirthday}"
@@ -48,7 +50,8 @@
                v-model="birthday"
                v-date
         >
-      </div><div class="inputForSteps">
+      </div>
+        <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[4].id">{{ data[4].labelText }}</label>
         <input class="inputForSteps__input"
                :class="{'inputForSteps__correct': isValidPassportNumbers}"
@@ -58,7 +61,8 @@
                v-model="passportNumber"
                v-passport-numbers
         >
-      </div><div class="inputForSteps">
+      </div>
+        <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[5].id">{{ data[5].labelText }}</label>
         <input class="inputForSteps__input"
                :class="{'inputForSteps__correct': isValidPassportWhoGive}"

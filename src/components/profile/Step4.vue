@@ -72,7 +72,7 @@ export default {
   },
   directives: {
     date,
-    passportNumbers
+    passportNumbers,
   },
   data() {
     return {
