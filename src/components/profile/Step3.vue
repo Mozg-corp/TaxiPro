@@ -110,11 +110,21 @@
   </div>
 </div>
 </template>
-
+<!--suppress JSAnnotator, JSUnusedGlobalSymbols -->
 <script>
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
+// eslint-disable-next-line import/named
+import {
+  isValid,
+  regSurname,
+  regName,
+  regDate,
+  regNumbersAndSpace,
+  regTextNumberMore,
+} from '@/store/regularExp';
 
+// eslint-disable-next-line no-unused-vars
 export default {
   name: 'Step3',
   data() {
@@ -188,75 +198,28 @@ export default {
       );
     },
     isValidSurname() {
-      return this.surname && this.surname.length > 1 && this.regSurname(this.surname);
+      return isValid(this.surname, 1, 99, regSurname);
     },
     isValidName() {
-      return this.name && this.name.length > 1 && this.regName(this.name);
+      return isValid(this.name, 1, 99, regName);
     },
     isValidPatronymic() {
-      return this.patronymic && this.patronymic.length > 1 && this.regPatronymic(this.patronymic);
+      return isValid(this.patronymic, 1, 99, regName);
     },
     isValidBirthday() {
-      return this.birthday && this.birthday.length === 10 && this.regBirthday(this.birthday);
+      return isValid(this.birthday, 9, 11, regDate);
     },
     isValidPassportNumbers() {
-      return this.passportNumber
-        && this.passportNumber.length > 9
-        && this.regPassportNumber(this.passportNumber);
+      return isValid(this.passportNumber, 9, 13, regNumbersAndSpace);
     },
     isValidPassportWhoGive() {
-      return this.passportWhoGive
-        && this.passportWhoGive.length > 14
-        && this.regPassportWhoGive(this.passportWhoGive);
+      return isValid(this.passportWhoGive, 14, 256, regTextNumberMore);
     },
     isValidPassportWhenGive() {
-      return this.passportWhenGive
-        && this.passportWhenGive.length === 10
-        && this.regPassportWhenGive(this.passportWhenGive);
+      return isValid(this.passportWhenGive, 9, 11, regDate);
     },
     isValidAddress() {
-      return this.address && this.address.length > 14 && this.regAddress(this.address);
-    },
-  },
-  methods: {
-    regSurname(surname) {
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(surname);
-    },
-    regName(name) {
-      const reg = /^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ' ]+[a-zA-Zа-яА-ЯёЁ']?$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(name);
-    },
-    regPatronymic(patronymic) {
-      const reg = /^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ' ]+[a-zA-Zа-яА-ЯёЁ']?$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(patronymic);
-    },
-    regBirthday(birthday) {
-      const reg = /^[0-9/]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(birthday);
-    },
-    regPassportNumber(passportNumber) {
-      const reg = /^[0-9 ]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(passportNumber);
-    },
-    regPassportWhoGive(passportWhoGive) {
-      const reg = /^[a-zA-Zа-яА-ЯёЁ'0-9][a-zA-Z-а-яА-ЯёЁ'0-9#№,. ]+[a-zA-Zа-яА-ЯёЁ0-9',.]?$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(passportWhoGive);
-    },
-    regPassportWhenGive(passportWhenGive) {
-      const reg = /^[0-9/]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(passportWhenGive);
-    },
-    regAddress(address) {
-      const reg = /^[a-zA-Zа-яА-ЯёЁ'0-9][a-zA-Z-а-яА-ЯёЁ'0-9#№,. ]+[a-zA-Zа-яА-ЯёЁ0-9',.]?$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(address);
+      return isValid(this.address, 14, 256, regTextNumberMore);
     },
   },
 };

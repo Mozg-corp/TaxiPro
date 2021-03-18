@@ -60,16 +60,16 @@
 
 <script>
 // eslint-disable-next-line import/extensions
-import inputForSteps from '@/components/profile/inputForSteps';
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
+import {
+  isValid,
+  regDate,
+  regNumbersAndSpace,
+} from '@/store/regularExp';
 
 export default {
   name: 'Step4',
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    inputForSteps,
-  },
   directives: {
     date,
     passportNumbers,
@@ -105,36 +105,13 @@ export default {
         && this.isValidWhenDriverLessonsClose);
     },
     isValidDriverNumbers() {
-      return this.driverNumbers
-        && this.driverNumbers.length > 10
-        && this.regDriverNumbers(this.driverNumbers);
+      return isValid(this.driverNumbers, 10, 15, regNumbersAndSpace);
     },
     isValidWhenDriverLessonsGive() {
-      return this.whenDriverLessonsGive
-        && this.whenDriverLessonsGive.length === 10
-        && this.regWhenDriverLessonsGive(this.whenDriverLessonsGive);
+      return isValid(this.whenDriverLessonsGive, 9, 11, regDate);
     },
     isValidWhenDriverLessonsClose() {
-      return this.whenDriverLessonsClose
-        && this.whenDriverLessonsClose.length === 10
-        && this.regWhenDriverLessonsClose(this.whenDriverLessonsClose);
-    },
-  },
-  methods: {
-    regDriverNumbers(driverNumbers) {
-      const reg = /^[0-9 ]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(driverNumbers);
-    },
-    regWhenDriverLessonsGive(whenDriverLessonsGive) {
-      const reg = /^[0-9/]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(whenDriverLessonsGive);
-    },
-    regWhenDriverLessonsClose(whenDriverLessonsClose) {
-      const reg = /^[0-9/]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(whenDriverLessonsClose);
+      return isValid(this.whenDriverLessonsClose, 9, 11, regDate);
     },
   },
 };

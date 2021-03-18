@@ -107,9 +107,16 @@
 
 <script>
 // eslint-disable-next-line import/extensions
-import inputForSteps from '@/components/profile/inputForSteps';
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
+import {
+  isValid,
+  regName,
+  regNumbersOnly,
+  regLettersNumbersOnly,
+  regTextNumberMore,
+  regNumbersMore,
+} from '@/store/regularExp';
 
 export default {
   name: 'Step5',
@@ -180,96 +187,33 @@ export default {
       );
     },
     isValidBrand() {
-      return this.brand
-        && this.brand.length > 1
-        && this.regBrand(this.brand);
+      return isValid(this.brand, 1, 99, regName);
     },
     isValidModel() {
-      return this.model
-        && this.model.length > 1
-        && this.regModel(this.model);
+      return isValid(this.model, 1, 99, regName);
     },
     isValidYear() {
-      return this.year
-        && this.year.length === 4
-        && this.regYear(this.year);
+      return isValid(this.year, 3, 5, regNumbersOnly);
     },
     isValidColor() {
-      return this.color
-        && this.color.length > 1
-        && this.regColor(this.color);
+      return isValid(this.color, 1, 99, regTextNumberMore);
     },
     isValidCarNumber() {
-      return this.carNumber
-        && this.carNumber.length > 6
-        && this.carNumber.length < 10
-        && this.regCarNumber(this.carNumber);
+      return isValid(this.carNumber, 6, 10, regTextNumberMore);
     },
     isValidVIN() {
-      return this.VIN
-        && this.VIN.length > 7
-        && this.regVIN(this.VIN);
+      return isValid(this.VIN, 7, 99, regLettersNumbersOnly);
     },
     isValidNumberCertificate() {
-      return this.numberCertificate
-        && this.numberCertificate.length > 7
-        && this.regNumberCertificate(this.numberCertificate);
+      return isValid(this.numberCertificate, 7, 99, regNumbersMore);
     },
     isValidLicense() {
-      return this.license
-        && this.license.length > 5
-        && this.regLicense(this.license);
-    },
-  },
-  methods: {
-    regBrand(brand) {
-      const reg = /^[A-Za-z-]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(brand);
-    },
-    regModel(model) {
-      const reg = /^[A-Za-z0-9+-]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(model);
-    },
-    regYear(year) {
-      const reg = /^[0-9]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(year);
-    },
-    regColor(color) {
-      const reg = /^[A-Za-z0-9/+#-]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(color);
-    },
-    regCarNumber(carNumber) {
-      const reg = /^[A-Za-zА-Яа-я0-9]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(carNumber);
-    },
-    regVIN(VIN) {
-      const reg = /^[A-Za-z0-9]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(VIN);
-    },
-    regNumberCertificate(numberCertificate) {
-      const reg = /^[0-9#№ ]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(numberCertificate);
-    },
-    regLicense(license) {
-      const reg = /^[0-9]+$/;
-      // eslint-disable-next-line no-unused-vars
-      return reg.test(license);
+      return isValid(this.license, 5, 20, regNumbersOnly);
     },
   },
   directives: {
     date,
     passportNumbers,
-  },
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    inputForSteps,
   },
 };
 </script>
