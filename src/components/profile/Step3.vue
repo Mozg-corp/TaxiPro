@@ -220,7 +220,6 @@ export default {
   },
   methods: {
     regSurname(surname) {
-      const reg = /^\s*[A-ZА-Яa-zа-яёЁ][A-ZА-Яa-zа-яёЁ]+('[a-zа-яёЁ]+|-[A-ZА-Яa-zа-яёЁ][A-ZА-Яa-zа-яёЁ]+)?\s*$/u;
       // eslint-disable-next-line no-unused-vars
       return reg.test(surname);
     },
