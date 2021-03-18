@@ -13,85 +13,125 @@
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[0].id">{{ data[0].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidSurname}"
+                 :class="{'inputForSteps__correct': isValidSurname,
+          'inputForSteps__error': !isInvalidSurname}"
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
                  v-model="surname"
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorSurname">
+            {{ errorSurname }}
+          </span>
         </div>
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[1].id">{{ data[1].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidName}"
+                 :class="{'inputForSteps__correct': isValidName,
+                  'inputForSteps__error': !isInvalidName}"
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
                  v-model="name"
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorName">
+            {{ errorName }}
+          </span>
         </div>
         <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[2].id">{{ data[2].labelText }}</label>
         <input class="inputForSteps__input"
-               :class="{'inputForSteps__correct': isValidPatronymic}"
+               :class="{'inputForSteps__correct': isValidPatronymic,
+               'inputForSteps__error': !isInvalidPatronymic}"
                type="text"
                :id="data[2].id"
                :placeholder="data[2].placeholder"
                v-model="patronymic"
         >
+          <span class="inputForSteps__errorText"
+                v-if="errorPatronymic">
+            {{ errorPatronymic }}
+          </span>
       </div>
         <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[3].id">{{ data[3].labelText }}</label>
         <input class="inputForSteps__input"
-               :class="{'inputForSteps__correct': isValidBirthday}"
+               :class="{'inputForSteps__correct': isValidBirthday,
+               'inputForSteps__error': !isInvalidBirthday}"
                type="text"
                :id="data[3].id"
                :placeholder="data[3].placeholder"
                v-model="birthday"
                v-date
         >
+          <span class="inputForSteps__errorText"
+                v-if="errorBirthday">
+            {{ errorBirthday }}
+          </span>
       </div>
         <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[4].id">{{ data[4].labelText }}</label>
         <input class="inputForSteps__input"
-               :class="{'inputForSteps__correct': isValidPassportNumbers}"
+               :class="{'inputForSteps__correct': isValidPassportNumbers,
+               'inputForSteps__error': !isInvalidPassportNumbers}"
                type="text"
                :id="data[4].id"
                :placeholder="data[4].placeholder"
                v-model="passportNumber"
                v-passport-numbers
         >
+          <span class="inputForSteps__errorText"
+                v-if="errorPassportNumbers">
+            {{ errorPassportNumbers }}
+          </span>
       </div>
         <div class="inputForSteps">
         <label class="inputForSteps__label" :for="data[5].id">{{ data[5].labelText }}</label>
         <input class="inputForSteps__input"
-               :class="{'inputForSteps__correct': isValidPassportWhoGive}"
+               :class="{'inputForSteps__correct': isValidPassportWhoGive,
+               'inputForSteps__error': !isInvalidPassportWhoGive}"
                type="text"
                :id="data[5].id"
                :placeholder="data[5].placeholder"
                v-model="passportWhoGive"
         >
+          <span class="inputForSteps__errorText"
+                v-if="errorPassportWhoGive">
+            {{ errorPassportWhoGive }}
+          </span>
       </div>
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[6].id">{{ data[6].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidPassportWhenGive}"
+                 :class="{'inputForSteps__correct': isValidPassportWhenGive,
+                 'inputForSteps__error': !isInvalidPassportWhenGive}"
                  type="text"
                  :id="data[6].id"
                  :placeholder="data[6].placeholder"
                  v-model="passportWhenGive"
                  v-date
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorPassportWhenGive">
+            {{ errorPassportWhenGive }}
+          </span>
         </div>
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[7].id">{{ data[7].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidAddress}"
+                 :class="{'inputForSteps__correct': isValidAddress,
+                 'inputForSteps__error': !isInvalidAddress}"
                  type="text"
                  :id="data[7].id"
                  :placeholder="data[7].placeholder"
                  v-model="address"
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorAddress">
+            {{ errorAddress }}
+          </span>
         </div>
       </div>
     </div>
@@ -123,6 +163,7 @@ import {
   regNumbersAndSpace,
   regTextNumberMore,
 } from '@/store/regularExp';
+import { errorText, errorDate } from '@/store/errorsText';
 
 // eslint-disable-next-line no-unused-vars
 export default {
@@ -130,13 +171,21 @@ export default {
   data() {
     return {
       surname: '',
+      errorSurname: '',
       name: '',
+      errorName: '',
       patronymic: '',
+      errorPatronymic: '',
       birthday: '',
+      errorBirthday: '',
       passportNumber: '',
+      errorPassportNumbers: '',
       passportWhoGive: '',
+      errorPassportWhoGive: '',
       passportWhenGive: '',
+      errorPassportWhenGive: '',
       address: '',
+      errorAddress: '',
       data: [
         {
           id: 'surname',
@@ -200,26 +249,124 @@ export default {
     isValidSurname() {
       return isValid(this.surname, 1, 99, regSurname);
     },
+    isInvalidSurname() {
+      if (this.surname) {
+        if (!isValid(this.surname, 1, 99, regSurname)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorSurname = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorSurname = '';
+      return true;
+    },
+    // eslint-disable-next-line consistent-return,vue/return-in-computed-property
     isValidName() {
       return isValid(this.name, 1, 99, regName);
+    },
+    // eslint-disable-next-line consistent-return,vue/return-in-computed-property
+    isInvalidName() {
+      if (this.name) {
+        if (!isValid(this.name, 1, 99, regName)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorName = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorName = '';
+      return true;
     },
     isValidPatronymic() {
       return isValid(this.patronymic, 1, 99, regName);
     },
+    isInvalidPatronymic() {
+      if (this.patronymic) {
+        if (!isValid(this.patronymic, 1, 99, regName)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorPatronymic = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorPatronymic = '';
+      return true;
+    },
     isValidBirthday() {
       return isValid(this.birthday, 9, 11, regDate);
+    },
+    isInvalidBirthday() {
+      if (this.birthday) {
+        if (!isValid(this.birthday, 9, 11, regDate)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorBirthday = errorDate;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorBirthday = '';
+      return true;
     },
     isValidPassportNumbers() {
       return isValid(this.passportNumber, 9, 13, regNumbersAndSpace);
     },
+    isInvalidPassportNumbers() {
+      if (this.passportNumber) {
+        if (!isValid(this.passportNumber, 9, 13, regNumbersAndSpace)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorPassportNumbers = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorPassportNumbers = '';
+      return true;
+    },
     isValidPassportWhoGive() {
       return isValid(this.passportWhoGive, 14, 256, regTextNumberMore);
+    },
+    isInvalidPassportWhoGive() {
+      if (this.passportWhoGive) {
+        if (!isValid(this.passportWhoGive, 14, 256, regTextNumberMore)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorPassportWhoGive = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorPassportWhoGive = '';
+      return true;
     },
     isValidPassportWhenGive() {
       return isValid(this.passportWhenGive, 9, 11, regDate);
     },
+    isInvalidPassportWhenGive() {
+      if (this.passportWhenGive) {
+        if (!isValid(this.passportWhenGive, 9, 11, regDate)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorPassportWhenGive = errorDate;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorPassportWhenGive = '';
+      return true;
+    },
     isValidAddress() {
       return isValid(this.address, 14, 256, regTextNumberMore);
+    },
+    isInvalidAddress() {
+      if (this.address) {
+        if (!isValid(this.address, 14, 256, regTextNumberMore)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorAddress = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorAddress = '';
+      return true;
     },
   },
 };
@@ -259,6 +406,12 @@ export default {
   }
   &__correct {
     border: 1px solid blue;
+  }
+  &__error {
+    border: 1px solid red;
+  }
+  &__errorText {
+    color: red;
   }
 }
 </style>

@@ -13,35 +13,50 @@
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[0].id">{{ data[0].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidDriverNumbers}"
+                 :class="{'inputForSteps__correct': isValidDriverNumbers,
+                 'inputForSteps__error': !isInvalidDriverNumbers}"
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
                  v-model="driverNumbers"
                  v-passport-numbers
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorDriverNumbers">
+            {{ errorDriverNumbers }}
+          </span>
         </div>
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[1].id">{{ data[1].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidWhenDriverLessonsGive}"
+                 :class="{'inputForSteps__correct': isValidWhenDriverLessonsGive,
+                 'inputForSteps__error': !isInvalidWhenDriverLessonsGive}"
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
                  v-model="whenDriverLessonsGive"
                  v-date
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorDriverLessonsGive">
+            {{ errorDriverLessonsGive }}
+          </span>
         </div>
         <div class="inputForSteps">
           <label class="inputForSteps__label" :for="data[2].id">{{ data[2].labelText }}</label>
           <input class="inputForSteps__input"
-                 :class="{'inputForSteps__correct': isValidWhenDriverLessonsClose}"
+                 :class="{'inputForSteps__correct': isValidWhenDriverLessonsClose,
+                 'inputForSteps__error': !isInvalidWhenDriverLessonsClose}"
                  type="text"
                  :id="data[2].id"
                  :placeholder="data[2].placeholder"
                  v-model="whenDriverLessonsClose"
                  v-date
           >
+          <span class="inputForSteps__errorText"
+                v-if="errorWhenDriverLessonsClose">
+            {{ errorWhenDriverLessonsClose }}
+          </span>
         </div>
       </div>
     </div>
@@ -67,6 +82,7 @@ import {
   regDate,
   regNumbersAndSpace,
 } from '@/store/regularExp';
+import { errorText, errorDate } from '@/store/errorsText';
 
 export default {
   name: 'Step4',
@@ -77,8 +93,11 @@ export default {
   data() {
     return {
       driverNumbers: '',
+      errorDriverNumbers: '',
       whenDriverLessonsGive: '',
+      errorDriverLessonsGive: '',
       whenDriverLessonsClose: '',
+      errorWhenDriverLessonsClose: '',
       data: [
         {
           id: 'driverNumbers',
@@ -107,11 +126,47 @@ export default {
     isValidDriverNumbers() {
       return isValid(this.driverNumbers, 10, 15, regNumbersAndSpace);
     },
+    isInvalidDriverNumbers() {
+      if (this.driverNumbers) {
+        if (!isValid(this.driverNumbers, 10, 15, regNumbersAndSpace)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorDriverNumbers = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorDriverNumbers = '';
+      return true;
+    },
     isValidWhenDriverLessonsGive() {
       return isValid(this.whenDriverLessonsGive, 9, 11, regDate);
     },
+    isInvalidWhenDriverLessonsGive() {
+      if (this.whenDriverLessonsGive) {
+        if (!isValid(this.whenDriverLessonsGive, 9, 11, regDate)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorDriverLessonsGive = errorDate;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorDriverLessonsGive = '';
+      return true;
+    },
     isValidWhenDriverLessonsClose() {
       return isValid(this.whenDriverLessonsClose, 9, 11, regDate);
+    },
+    isInvalidWhenDriverLessonsClose() {
+      if (this.whenDriverLessonsClose) {
+        if (!isValid(this.whenDriverLessonsClose, 9, 11, regDate)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorWhenDriverLessonsClose = errorDate;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorWhenDriverLessonsClose = '';
+      return true;
     },
   },
 };
