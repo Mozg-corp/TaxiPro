@@ -8,7 +8,12 @@
     <div class="choiceTaxi">
       <h2 class="choiceTaxi__header">Выберите агрегаторы такси через которые вы будите работать</h2>
       <div class="choiceTaxi__nameAgregators">
-        <input class="inputNone" type="checkbox" id="gett" v-model="agregators" value="gett">
+        <input
+          class="inputNone"
+          type="checkbox"
+          id="gett"
+          v-model="agregators"
+          value="gett">
         <label for="gett">
           <div class="choiceTaxi__block">
             <div class="agregator">
@@ -17,7 +22,12 @@
             </div>
           </div>
         </label>
-        <input class="inputNone" type="checkbox" id="uber" v-model="agregators" value="uber">
+        <input
+          class="inputNone"
+          type="checkbox"
+          id="uber"
+          v-model="agregators"
+          value="uber">
         <label for="uber">
         <div class="choiceTaxi__block">
           <div class="agregator">
@@ -26,17 +36,13 @@
           </div>
         </div>
         </label>
-        <input class="inputNone" type="checkbox" id="yandexTaxi" v-model="agregators" value="yandexTaxi">
+        <input
+          class="inputNone"
+          type="checkbox"
+          id="yandexTaxi"
+          v-model="agregators"
+          value="yandexTaxi">
         <label for="yandexTaxi">
-        <div class="choiceTaxi__block">
-          <div class="agregator">
-            <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/ситимобил.png" alt="ситимобил">
-          </div>
-        </div>
-        </label>
-        <input class="inputNone" type="checkbox" id="citymobile" v-model="agregators" value="citymobile">
-        <label for="citymobile">
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
@@ -44,17 +50,38 @@
           </div>
         </div>
         </label>
+        <input
+          class="inputNone"
+          type="checkbox"
+          id="citymobile"
+          v-model="agregators"
+          value="citymobile">
+        <label for="citymobile">
+        <div class="choiceTaxi__block">
+          <div class="agregator">
+            <div class="agregator__circle"></div>
+            <img class="agregator__img" src="/assets/images/step2/ситимобил.png" alt="ситимобил">
+          </div>
+        </div>
+        </label>
       </div>
     </div>
     <div class="btn_step">
       <router-link class="routerLink" :to="{ name: 'Step3' }">
-        <button :disabled="isEmpty" class="button routerLink">Выбрать</button>
+        <button
+          @click="setSecondStep"
+          :disabled="isEmpty"
+          class="button routerLink">
+          Выбрать
+        </button>
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Step2',
   data() {
@@ -63,13 +90,16 @@ export default {
     };
   },
   computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
     isEmpty() {
-      // eslint-disable-next-line eqeqeq
-      if (this.agregators.length == 0) {
-        return true;
-      }
-      return false;
+      return this.agregators.length === 0;
+    },
+  },
+  methods: {
+    ...mapActions({
+      secondStepToState: 'profile/secondStepToState',
+    }),
+    setSecondStep() {
+      this.secondStepToState(this.agregators);
     },
   },
 };

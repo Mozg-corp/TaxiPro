@@ -30,7 +30,15 @@
       </ul>
     </div>
     <div class="tariffs">
-      <input class="inputNone" type="radio" name="direction" id="start" v-model="tariffName" value="Старт" checked><label for="start">
+      <input
+        class="inputNone"
+        type="radio"
+        name="direction"
+        id="start"
+        v-model="tariffName"
+        value="Старт"
+        checked>
+      <label for="start">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -44,7 +52,9 @@
                 <ul class="cardTariff__ul">
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Никаких процентов от заказа - только абонентская плата</li>
+                    <li class="cardTariff__li">
+                      Никаких процентов от заказа - только абонентская плата
+                    </li>
                   </div>
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
@@ -61,7 +71,14 @@
         </div>
       </div>
     </label>
-      <input class="inputNone" type="radio" name="direction" id="comfort" v-model="tariffName" value="Комфорт"><label for="comfort">
+      <input
+        class="inputNone"
+        type="radio"
+        name="direction"
+        id="comfort"
+        v-model="tariffName"
+        value="Комфорт">
+      <label for="comfort">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -75,7 +92,9 @@
                 <ul class="cardTariff__ul">
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Никаких процентов от заказа - только абонентская плата</li>
+                    <li class="cardTariff__li">
+                      Никаких процентов от заказа - только абонентская плата
+                    </li>
                   </div>
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
@@ -92,7 +111,14 @@
         </div>
       </div>
     </label>
-      <input class="inputNone" type="radio" name="direction" id="premium" v-model="tariffName" value="Премиум"><label for="premium">
+      <input
+        class="inputNone"
+        type="radio"
+        name="direction"
+        id="premium"
+        v-model="tariffName"
+        value="Премиум">
+      <label for="premium">
       <div class="tariff">
         <div class="tariff__block">
           <div class="cardTariff">
@@ -106,7 +132,9 @@
                 <ul class="cardTariff__ul">
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Никаких процентов от заказа - только абонентская плата</li>
+                    <li class="cardTariff__li">
+                      Никаких процентов от заказа - только абонентская плата
+                    </li>
                   </div>
                   <div class="flex">
                     <div class="cardTariff__circle"></div>
@@ -125,7 +153,11 @@
     </label>
     </div>
     <div class="btn_step">
-      <router-link :to="{ name: 'Step2' }" class="button routerLink">
+      <router-link
+        :to="{ name: 'Step2' }"
+        class="button routerLink"
+      @click="setFirstStep"
+      >
         Выбрать тариф {{ tariffName }}
       </router-link>
     </div>
@@ -133,12 +165,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Step1',
   data() {
     return {
       tariffName: 'Старт',
     };
+  },
+  methods: {
+    ...mapActions({
+      setFirstStepToState: 'profile/setFirstStepToState',
+    }),
+    setFirstStep() {
+      this.setFirstStepToState(this.tariffName);
+    },
   },
 };
 </script>

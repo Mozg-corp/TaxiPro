@@ -18,7 +18,7 @@
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
-                 v-model="driverNumbers"
+                 v-model="driverLessons.driverNumbers"
                  v-passport-numbers
           >
           <span class="inputForSteps__errorText"
@@ -34,7 +34,7 @@
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
-                 v-model="whenDriverLessonsGive"
+                 v-model="driverLessons.whenDriverLessonsGive"
                  v-date
           >
           <span class="inputForSteps__errorText"
@@ -50,7 +50,7 @@
                  type="text"
                  :id="data[2].id"
                  :placeholder="data[2].placeholder"
-                 v-model="whenDriverLessonsClose"
+                 v-model="driverLessons.whenDriverLessonsClose"
                  v-date
           >
           <span class="inputForSteps__errorText"
@@ -64,6 +64,7 @@
   <div class="btn_step">
     <router-link :to="{ name: 'Step5' }"  class="button routerLink">
       <button
+        @click="setFourStep"
         :disabled="!isAllInputsCorrect"
         class="button routerLink"
       >Далее
@@ -74,7 +75,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line import/extensions
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
 import {
@@ -83,6 +83,7 @@ import {
   regNumbersAndSpace,
 } from '@/store/regularExp';
 import { errorText, errorDate } from '@/store/errorsText';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Step4',
@@ -92,11 +93,13 @@ export default {
   },
   data() {
     return {
-      driverNumbers: '',
+      driverLessons: {
+        driverNumbers: '',
+        whenDriverLessonsGive: '',
+        whenDriverLessonsClose: '',
+      },
       errorDriverNumbers: '',
-      whenDriverLessonsGive: '',
       errorDriverLessonsGive: '',
-      whenDriverLessonsClose: '',
       errorWhenDriverLessonsClose: '',
       data: [
         {
@@ -117,6 +120,14 @@ export default {
       ],
     };
   },
+  methods: {
+    ...mapActions({
+      setFourStepToState: 'profile/setFourStepToState',
+    }),
+    setFourStep() {
+      this.setFourStepToState(this.driverLessons);
+    },
+  },
   computed: {
     isAllInputsCorrect() {
       return !!(this.isValidDriverNumbers
@@ -124,11 +135,11 @@ export default {
         && this.isValidWhenDriverLessonsClose);
     },
     isValidDriverNumbers() {
-      return isValid(this.driverNumbers, 10, 15, regNumbersAndSpace);
+      return isValid(this.driverLessons.driverNumbers, 10, 15, regNumbersAndSpace);
     },
     isInvalidDriverNumbers() {
-      if (this.driverNumbers) {
-        if (!isValid(this.driverNumbers, 10, 15, regNumbersAndSpace)) {
+      if (this.driverLessons.driverNumbers) {
+        if (!isValid(this.driverLessons.driverNumbers, 10, 15, regNumbersAndSpace)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorDriverNumbers = errorText;
           return false;
@@ -139,11 +150,11 @@ export default {
       return true;
     },
     isValidWhenDriverLessonsGive() {
-      return isValid(this.whenDriverLessonsGive, 9, 11, regDate);
+      return isValid(this.driverLessons.whenDriverLessonsGive, 9, 11, regDate);
     },
     isInvalidWhenDriverLessonsGive() {
-      if (this.whenDriverLessonsGive) {
-        if (!isValid(this.whenDriverLessonsGive, 9, 11, regDate)) {
+      if (this.driverLessons.whenDriverLessonsGive) {
+        if (!isValid(this.driverLessons.whenDriverLessonsGive, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorDriverLessonsGive = errorDate;
           return false;
@@ -154,11 +165,11 @@ export default {
       return true;
     },
     isValidWhenDriverLessonsClose() {
-      return isValid(this.whenDriverLessonsClose, 9, 11, regDate);
+      return isValid(this.driverLessons.whenDriverLessonsClose, 9, 11, regDate);
     },
     isInvalidWhenDriverLessonsClose() {
-      if (this.whenDriverLessonsClose) {
-        if (!isValid(this.whenDriverLessonsClose, 9, 11, regDate)) {
+      if (this.driverLessons.whenDriverLessonsClose) {
+        if (!isValid(this.driverLessons.whenDriverLessonsClose, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorWhenDriverLessonsClose = errorDate;
           return false;

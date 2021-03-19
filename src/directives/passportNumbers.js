@@ -1,6 +1,6 @@
 export default {
   mounted(el) {
-    el.addEventListener('keyup', function good(e){
+    el.addEventListener('keyup', (e) => {
       if (e.keyCode < 47 || e.keyCode > 57) {
         e.preventDefault();
       }
@@ -12,7 +12,8 @@ export default {
       }
       if (len === 4) {
         if (e.keyCode !== 8 && e.keyCode !== 46) {
-          el.value = el.value + ' ';
+          // eslint-disable-next-line no-param-reassign
+          el.value += ' ';
         }
       }
     });
