@@ -94,6 +94,14 @@ const setResponse = (state) => {
   state.loading = false;
 };
 
+/**
+ * @param state
+ * @param phone { string|numbers }
+ */
+const fixedPhone = (state, phone) => {
+  state.phone = phone;
+};
+
 export default {
   [MT.DEC_ATTEMPTS_FOR_CODE]: decAttemptsForCode,
   [MT.SET_CURRENT_TIME]: setCurrentTime,
@@ -105,4 +113,5 @@ export default {
   [MT.SET_TIMER]: setTimer,
   [MT.SET_TOKEN]: setToken,
   [MT.SET_USER]: setUser,
+  fixedPhone,
 };

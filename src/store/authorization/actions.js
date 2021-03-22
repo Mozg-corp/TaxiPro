@@ -151,6 +151,15 @@ const sendCode = ({ commit, getters }, code) => {
     });
 };
 
+/**
+ * Инициализирует состояние авторизации
+ * @param commit
+ * @param phone { string|number }
+ */
+const fixedPhone = ({ commit }, phone) => {
+  commit('fixedPhone', phone);
+};
+
 export default {
   init,
   reset,
@@ -158,4 +167,5 @@ export default {
   setTimer,
   sendPhone,
   sendCode,
+  fixedPhone,
 };

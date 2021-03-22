@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     // data
-    phone: null,
+    phone: '',
     sms: null,
     token: null,
     user: null,

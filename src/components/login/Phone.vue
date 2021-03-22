@@ -10,7 +10,7 @@
 
 <!--suppress JSAnnotator -->
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import phoneMask, { convertNumberToPhone } from '@/directives/phoneMask';
 import restrict from '@/directives/restrictKeys';
 
@@ -21,14 +21,22 @@ export default {
     phoneMask,
     restrict,
   },
-
   computed: {
     ...mapGetters({
       getPhone: 'authorization/getPhone',
     }),
   },
-
+  methods: {
+    ...mapActions({
+      fixedPhone: 'authorization/fixedPhone',
+    }),
+  },
   mounted() {
+    console.log(this.getPhone);
+    if (this.getPhone === null) {
+      this.fixedPhone('');
+    }
+    console.log(this.getPhone);
     const el = this.$el.querySelector('.login-phone__input');
     el.dataset.number = this.getPhone.substr(1);
     el.dataset.phone = convertNumberToPhone(el.dataset.number);

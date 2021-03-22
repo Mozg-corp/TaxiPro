@@ -10,10 +10,18 @@ const setThirdStepToState = (state, passport) => {
 const setFourStepToState = (state, driverLessons) => {
   state.registrationData.driverLessons = driverLessons;
 };
+const setFiveStepToState = (state, car) => {
+  state.registrationData.car = car;
+};
+const setLicenseToState = (state, license) => {
+  state.registrationData.license = license;
+};
 
 export default {
   setFirstStepToState,
   setSecondStepToState,
   setThirdStepToState,
   setFourStepToState,
+  setFiveStepToState,
+  setLicenseToState,
 };
