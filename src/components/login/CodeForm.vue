@@ -15,11 +15,15 @@
     <h3 class="login__label login__label_code">Введите код</h3>
 
     <input class="login__input-code" v-restrict.numbers maxlength="4" v-model="code">
-
-    <el-button class="button login__button login__button_send"
-               v-bind:disabled="sendDisabled" @click="sendCodeHandler">
-      {{ sendTitle }}
-    </el-button>
+    <router-link :to="{ name: 'Welcome' }">
+      <button
+        class="button login__button login__button_send"
+        v-bind:disabled="sendDisabled"
+        @click="sendCodeHandler"
+      >
+        {{ sendTitle }}
+      </button>
+    </router-link>
 
     <p class="login__timer login__timer_resubmit" v-show="resubmitTime > 0">
       Вы сможете запросить код повторно через:<br>

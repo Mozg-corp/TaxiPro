@@ -5,12 +5,16 @@
         Проверьте данные
       </div>
     </div>
-    <div class="allData">
-      <div v-for="item in Data"
-           :key="item"
-           class="card">
-        {{item}}
-      </div>
+    <div class="center">
+      <LastStepCard
+      :header="'Номер телефона'"
+      :info="'+'+Phone"
+      ></LastStepCard>
+        <LastStepCard
+          v-for="item in Data" :key="item"
+          :header="item.text"
+          :info="item.value"
+        ></LastStepCard>
     </div>
     <router-link :to="{ name: 'endRegistration' }" class="button routerLink">
       <button @click="sendData" class="button routerLink">
@@ -23,13 +27,24 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+// eslint-disable-next-line import/extensions
+import LastStepCard from '@/components/profile/LastStepCard';
 
 export default {
   name: 'endRegistration',
+  data() {
+    return {
+    };
+  },
   computed: {
     ...mapGetters({
       Data: 'profile/getRegistrationData',
+      Phone: 'authorization/getPhone',
     }),
+  },
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    LastStepCard,
   },
   methods: {
     sendData() {
@@ -49,5 +64,24 @@ export default {
 </script>
 
 <style lang="scss">
+.center {
+  padding: 12px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.box-card {
+}
 </style>
