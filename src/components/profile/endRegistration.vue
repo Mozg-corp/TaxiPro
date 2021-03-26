@@ -11,8 +11,10 @@
       :info="'+'+Phone"
       ></LastStepCard>
         <LastStepCard
-          v-for="item in Data" :key="item"
+          v-for="item in Data"
+          :key="item"
           :header="item.text"
+          :typeText="item.type"
           :info="item.value"
         ></LastStepCard>
     </div>

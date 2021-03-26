@@ -7,27 +7,33 @@ export default {
   state: {
     registrationData: {
       tariffName: {
+        type: 'single',
         text: 'Тариф',
         value: '',
       },
       agregators: {
+        type: 'image',
         text: 'Агрегаторы',
         value: [],
         path: '',
       },
       passport: {
+        type: 'big',
         text: 'Паспортные данные',
-        value: {},
+        value: [],
       },
       driverLessons: {
+        type: 'big',
         text: 'Данные В.У.',
-        value: {},
+        value: [],
       },
       car: {
+        type: 'big',
         text: 'Данные С.Т.',
-        value: {},
+        value: [],
       },
       license: {
+        type: 'single',
         text: 'Данные лицензии',
         value: '',
       },

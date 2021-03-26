@@ -18,7 +18,7 @@
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
-                 v-model="driverLessons.driverNumbers"
+                 v-model="driverLessons[0].value"
                  v-passport-numbers
           >
           <span class="inputForSteps__errorText"
@@ -34,7 +34,7 @@
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
-                 v-model="driverLessons.whenDriverLessonsGive"
+                 v-model="driverLessons[1].value"
                  v-date
           >
           <span class="inputForSteps__errorText"
@@ -50,7 +50,7 @@
                  type="text"
                  :id="data[2].id"
                  :placeholder="data[2].placeholder"
-                 v-model="driverLessons.whenDriverLessonsClose"
+                 v-model="driverLessons[2].value"
                  v-date
           >
           <span class="inputForSteps__errorText"
@@ -93,11 +93,20 @@ export default {
   },
   data() {
     return {
-      driverLessons: {
-        driverNumbers: '',
-        whenDriverLessonsGive: '',
-        whenDriverLessonsClose: '',
-      },
+      driverLessons: [
+        {
+          text: 'Сериия и номер В.У.',
+          value: '',
+        },
+        {
+          text: 'Дата выдачи',
+          value: '',
+        },
+        {
+          text: 'Срок выдачи',
+          value: '',
+        },
+      ],
       errorDriverNumbers: '',
       errorDriverLessonsGive: '',
       errorWhenDriverLessonsClose: '',
@@ -135,11 +144,11 @@ export default {
         && this.isValidWhenDriverLessonsClose);
     },
     isValidDriverNumbers() {
-      return isValid(this.driverLessons.driverNumbers, 10, 15, regNumbersAndSpace);
+      return isValid(this.driverLessons[0].value, 10, 15, regNumbersAndSpace);
     },
     isInvalidDriverNumbers() {
-      if (this.driverLessons.driverNumbers) {
-        if (!isValid(this.driverLessons.driverNumbers, 10, 15, regNumbersAndSpace)) {
+      if (this.driverLessons[0].value) {
+        if (!isValid(this.driverLessons[0].value, 10, 15, regNumbersAndSpace)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorDriverNumbers = errorText;
           return false;
@@ -150,11 +159,11 @@ export default {
       return true;
     },
     isValidWhenDriverLessonsGive() {
-      return isValid(this.driverLessons.whenDriverLessonsGive, 9, 11, regDate);
+      return isValid(this.driverLessons[1].value, 9, 11, regDate);
     },
     isInvalidWhenDriverLessonsGive() {
-      if (this.driverLessons.whenDriverLessonsGive) {
-        if (!isValid(this.driverLessons.whenDriverLessonsGive, 9, 11, regDate)) {
+      if (this.driverLessons[2].value) {
+        if (!isValid(this.driverLessons[2].value, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorDriverLessonsGive = errorDate;
           return false;
@@ -165,11 +174,11 @@ export default {
       return true;
     },
     isValidWhenDriverLessonsClose() {
-      return isValid(this.driverLessons.whenDriverLessonsClose, 9, 11, regDate);
+      return isValid(this.driverLessons[2].value, 9, 11, regDate);
     },
     isInvalidWhenDriverLessonsClose() {
-      if (this.driverLessons.whenDriverLessonsClose) {
-        if (!isValid(this.driverLessons.whenDriverLessonsClose, 9, 11, regDate)) {
+      if (this.driverLessons[2].value) {
+        if (!isValid(this.driverLessons[2].value, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorWhenDriverLessonsClose = errorDate;
           return false;

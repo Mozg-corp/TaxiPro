@@ -18,7 +18,7 @@
           <div class="choiceTaxi__block">
             <div class="agregator">
               <div class="agregator__circle"></div>
-              <img class="agregator__img" src="/assets/images/step2/Gett.jpeg" alt="gett">
+              <img class="agregator__img" src="/assets/images/step2/gett.jpeg" alt="gett">
             </div>
           </div>
         </label>
@@ -46,7 +46,11 @@
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/ЯТакси.jpeg" alt="Яндекс Такси">
+            <img
+              class="agregator__img"
+              src="/assets/images/step2/yandexTaxi.jpeg"
+              alt="Яндекс Такси"
+            >
           </div>
         </div>
         </label>
@@ -60,7 +64,7 @@
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/ситимобил.jpeg" alt="ситимобил">
+            <img class="agregator__img" src="/assets/images/step2/citymobile.jpeg" alt="ситимобил">
           </div>
         </div>
         </label>

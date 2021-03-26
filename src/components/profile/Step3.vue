@@ -19,7 +19,7 @@
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
-                 v-model.lazy="passport.surname"
+                 v-model="passport[0].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorSurname">
@@ -34,7 +34,7 @@
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
-                 v-model="passport.name"
+                 v-model="passport[1].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorName">
@@ -49,7 +49,7 @@
                type="text"
                :id="data[2].id"
                :placeholder="data[2].placeholder"
-               v-model="passport.patronymic"
+               v-model="passport[2].value"
         >
           <span class="inputForSteps__errorText"
                 v-if="errorPatronymic">
@@ -64,7 +64,7 @@
                type="text"
                :id="data[3].id"
                :placeholder="data[3].placeholder"
-               v-model="passport.birthday"
+               v-model="passport[3].value"
                v-date
         >
           <span class="inputForSteps__errorText"
@@ -80,7 +80,7 @@
                type="text"
                :id="data[4].id"
                :placeholder="data[4].placeholder"
-               v-model="passport.passportNumber"
+               v-model="passport[4].value"
                v-passport-numbers
         >
           <span class="inputForSteps__errorText"
@@ -96,7 +96,7 @@
                type="text"
                :id="data[5].id"
                :placeholder="data[5].placeholder"
-               v-model="passport.passportWhoGive"
+               v-model="passport[5].value"
         >
           <span class="inputForSteps__errorText"
                 v-if="errorPassportWhoGive">
@@ -111,7 +111,7 @@
                  type="text"
                  :id="data[6].id"
                  :placeholder="data[6].placeholder"
-                 v-model="passport.passportWhenGive"
+                 v-model="passport[6].value"
                  v-date
           >
           <span class="inputForSteps__errorText"
@@ -127,7 +127,7 @@
                  type="text"
                  :id="data[7].id"
                  :placeholder="data[7].placeholder"
-                 v-model="passport.address"
+                 v-model="passport[7].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorAddress">
@@ -172,16 +172,40 @@ export default {
   name: 'Step3',
   data() {
     return {
-      passport: {
-        surname: '',
-        name: '',
-        patronymic: '',
-        birthday: '',
-        passportNumber: '',
-        passportWhoGive: '',
-        passportWhenGive: '',
-        address: '',
-      },
+      passport: [
+        {
+          text: 'Фамилия',
+          value: '',
+        },
+        {
+          text: 'Имя',
+          value: '',
+        },
+        {
+          text: 'Отчество (если есть)',
+          value: '',
+        },
+        {
+          text: 'Дата рождения',
+          value: '',
+        },
+        {
+          text: 'серия и номер паспорта',
+          value: '',
+        },
+        {
+          text: 'Кем выдан',
+          value: '',
+        },
+        {
+          text: 'Когда выдан',
+          value: '',
+        },
+        {
+          text: 'Адресс регистрации',
+          value: '',
+        },
+      ],
       errorSurname: '',
       errorName: '',
       errorPatronymic: '',
@@ -259,11 +283,11 @@ export default {
       );
     },
     isValidSurname() {
-      return isValid(this.passport.surname, 1, 99, regSurname);
+      return isValid(this.passport[0].value, 1, 99, regSurname);
     },
     isInvalidSurname() {
-      if (this.passport.surname) {
-        if (!isValid(this.passport.surname, 1, 99, regSurname)) {
+      if (this.passport[0].value) {
+        if (!isValid(this.passport[0].value, 1, 99, regSurname)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorSurname = errorText;
           return false;
@@ -275,12 +299,12 @@ export default {
     },
     // eslint-disable-next-line consistent-return,vue/return-in-computed-property
     isValidName() {
-      return isValid(this.passport.name, 1, 99, regName);
+      return isValid(this.passport[1].value, 1, 99, regName);
     },
     // eslint-disable-next-line consistent-return,vue/return-in-computed-property
     isInvalidName() {
-      if (this.passport.name) {
-        if (!isValid(this.passport.name, 1, 99, regName)) {
+      if (this.passport[1].value) {
+        if (!isValid(this.passport[1].value, 1, 99, regName)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorName = errorText;
           return false;
@@ -291,11 +315,11 @@ export default {
       return true;
     },
     isValidPatronymic() {
-      return isValid(this.passport.patronymic, 1, 99, regName);
+      return isValid(this.passport[2].value, 1, 99, regName);
     },
     isInvalidPatronymic() {
-      if (this.passport.patronymic) {
-        if (!isValid(this.passport.patronymic, 1, 99, regName)) {
+      if (this.passport[2].value) {
+        if (!isValid(this.passport[2].value, 1, 99, regName)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorPatronymic = errorText;
           return false;
@@ -306,11 +330,11 @@ export default {
       return true;
     },
     isValidBirthday() {
-      return isValid(this.passport.birthday, 9, 11, regDate);
+      return isValid(this.passport[3].value, 9, 11, regDate);
     },
     isInvalidBirthday() {
-      if (this.passport.birthday) {
-        if (!isValid(this.passport.birthday, 9, 11, regDate)) {
+      if (this.passport[3].value) {
+        if (!isValid(this.passport[3].value, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorBirthday = errorDate;
           return false;
@@ -321,11 +345,11 @@ export default {
       return true;
     },
     isValidPassportNumbers() {
-      return isValid(this.passport.passportNumber, 9, 13, regNumbersAndSpace);
+      return isValid(this.passport[4].value, 9, 13, regNumbersAndSpace);
     },
     isInvalidPassportNumbers() {
-      if (this.passport.passportNumber) {
-        if (!isValid(this.passport.passportNumber, 9, 13, regNumbersAndSpace)) {
+      if (this.passport[4].value) {
+        if (!isValid(this.passport[4].value, 9, 13, regNumbersAndSpace)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorPassportNumbers = errorText;
           return false;
@@ -336,11 +360,11 @@ export default {
       return true;
     },
     isValidPassportWhoGive() {
-      return isValid(this.passport.passportWhoGive, 14, 256, regTextNumberMore);
+      return isValid(this.passport[5].value, 14, 256, regTextNumberMore);
     },
     isInvalidPassportWhoGive() {
-      if (this.passport.passportWhoGive) {
-        if (!isValid(this.passport.passportWhoGive, 14, 256, regTextNumberMore)) {
+      if (this.passport[5].value) {
+        if (!isValid(this.passport[5].value, 14, 256, regTextNumberMore)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorPassportWhoGive = errorText;
           return false;
@@ -351,11 +375,11 @@ export default {
       return true;
     },
     isValidPassportWhenGive() {
-      return isValid(this.passport.passportWhenGive, 9, 11, regDate);
+      return isValid(this.passport[6].value, 9, 11, regDate);
     },
     isInvalidPassportWhenGive() {
-      if (this.passport.passportWhenGive) {
-        if (!isValid(this.passport.passportWhenGive, 9, 11, regDate)) {
+      if (this.passport[6].value) {
+        if (!isValid(this.passport[6].value, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorPassportWhenGive = errorDate;
           return false;
@@ -366,11 +390,11 @@ export default {
       return true;
     },
     isValidAddress() {
-      return isValid(this.passport.address, 14, 256, regTextNumberMore);
+      return isValid(this.passport[7].value, 14, 256, regTextNumberMore);
     },
     isInvalidAddress() {
-      if (this.passport.address) {
-        if (!isValid(this.passport.address, 14, 256, regTextNumberMore)) {
+      if (this.passport[7].value) {
+        if (!isValid(this.passport[7].value, 14, 256, regTextNumberMore)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorAddress = errorText;
           return false;

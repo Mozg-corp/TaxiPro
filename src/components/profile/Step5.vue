@@ -18,7 +18,7 @@
                  type="text"
                  :id="data[0].id"
                  :placeholder="data[0].placeholder"
-                 v-model="car.brand"
+                 v-model="car[0].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorBrand">
@@ -33,7 +33,7 @@
                  type="text"
                  :id="data[1].id"
                  :placeholder="data[1].placeholder"
-                 v-model="car.model"
+                 v-model="car[1].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorModel">
@@ -48,7 +48,7 @@
                  type="text"
                  :id="data[2].id"
                  :placeholder="data[2].placeholder"
-                 v-model="car.year"
+                 v-model="car[2].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorYear">
@@ -63,7 +63,7 @@
                  type="text"
                  :id="data[3].id"
                  :placeholder="data[3].placeholder"
-                 v-model="car.color"
+                 v-model="car[3].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorColor">
@@ -78,7 +78,7 @@
                  type="text"
                  :id="data[4].id"
                  :placeholder="data[4].placeholder"
-                 v-model="car.carNumber"
+                 v-model="car[4].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorCarNumber">
@@ -93,7 +93,7 @@
                  type="text"
                  :id="data[5].id"
                  :placeholder="data[5].placeholder"
-                 v-model="car.VIN"
+                 v-model="car[5].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorVIN">
@@ -108,7 +108,7 @@
                  type="text"
                  :id="data[6].id"
                  :placeholder="data[6].placeholder"
-                 v-model="car.numberCertificate"
+                 v-model="car[6].value"
           >
           <span class="inputForSteps__errorText"
                 v-if="errorNumberCertificate">
@@ -165,15 +165,36 @@ export default {
   name: 'Step5',
   data() {
     return {
-      car: {
-        brand: '',
-        model: '',
-        year: '',
-        color: '',
-        carNumber: '',
-        VIN: '',
-        numberCertificate: '',
-      },
+      car: [
+        {
+          text: 'Марка автомобиля',
+          value: '',
+        },
+        {
+          text: 'Модель автомобиля',
+          value: '',
+        },
+        {
+          text: 'Год автомобиля',
+          value: '',
+        },
+        {
+          text: 'Цвет автомобиля',
+          value: '',
+        },
+        {
+          text: 'Регистрационный знак ТС',
+          value: '',
+        },
+        {
+          text: 'VIN',
+          value: '',
+        },
+        {
+          text: 'Номер свидетельства Т.С.',
+          value: '',
+        },
+      ],
       errorBrand: '',
       errorModel: '',
       errorYear: '',
@@ -250,11 +271,11 @@ export default {
       );
     },
     isValidBrand() {
-      return isValid(this.car.brand, 1, 99, regName);
+      return isValid(this.car[0].value, 1, 99, regName);
     },
     isInvalidBrand() {
-      if (this.car.brand) {
-        if (!isValid(this.car.brand, 1, 99, regName)) {
+      if (this.car[0].value) {
+        if (!isValid(this.car[0].value, 1, 99, regName)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorBrand = errorText;
           return false;
@@ -265,11 +286,11 @@ export default {
       return true;
     },
     isValidModel() {
-      return isValid(this.car.model, 1, 99, regName);
+      return isValid(this.car[1].value, 1, 99, regName);
     },
     isInvalidModel() {
-      if (this.car.model) {
-        if (!isValid(this.car.model, 1, 99, regName)) {
+      if (this.car[1].value) {
+        if (!isValid(this.car[1].value, 1, 99, regName)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorModel = errorText;
           return false;
@@ -280,11 +301,11 @@ export default {
       return true;
     },
     isValidYear() {
-      return isValid(this.car.year, 3, 5, regNumbersOnly);
+      return isValid(this.car[2].value, 3, 5, regNumbersOnly);
     },
     isInvalidYear() {
-      if (this.car.year) {
-        if (!isValid(this.car.year, 3, 5, regNumbersOnly)) {
+      if (this.car[2].value) {
+        if (!isValid(this.car[2].value, 3, 5, regNumbersOnly)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorYear = errorDate;
           return false;
@@ -295,11 +316,11 @@ export default {
       return true;
     },
     isValidColor() {
-      return isValid(this.car.color, 1, 99, regTextNumberMore);
+      return isValid(this.car[3].value, 1, 99, regTextNumberMore);
     },
     isInvalidColor() {
-      if (this.car.color) {
-        if (!isValid(this.car.color, 1, 99, regTextNumberMore)) {
+      if (this.car[3].value) {
+        if (!isValid(this.car[3].value, 1, 99, regTextNumberMore)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorColor = errorText;
           return false;
@@ -310,11 +331,11 @@ export default {
       return true;
     },
     isValidCarNumber() {
-      return isValid(this.car.carNumber, 6, 10, regTextNumberMore);
+      return isValid(this.car[4].value, 6, 10, regTextNumberMore);
     },
     isInvalidCarNumber() {
-      if (this.car.carNumber) {
-        if (!isValid(this.car.carNumber, 6, 10, regTextNumberMore)) {
+      if (this.car[4].value) {
+        if (!isValid(this.car[4].value, 6, 10, regTextNumberMore)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorCarNumber = errorText;
           return false;
@@ -325,11 +346,11 @@ export default {
       return true;
     },
     isValidVIN() {
-      return isValid(this.car.VIN, 7, 99, regLettersNumbersOnly);
+      return isValid(this.car[5].value, 7, 99, regLettersNumbersOnly);
     },
     isInvalidVIN() {
-      if (this.car.VIN) {
-        if (!isValid(this.car.VIN, 7, 99, regLettersNumbersOnly)) {
+      if (this.car[5].value) {
+        if (!isValid(this.car[5].value, 7, 99, regLettersNumbersOnly)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorVIN = errorText;
           return false;
@@ -340,11 +361,11 @@ export default {
       return true;
     },
     isValidNumberCertificate() {
-      return isValid(this.car.numberCertificate, 7, 99, regNumbersMore);
+      return isValid(this.car[6].value, 7, 99, regNumbersMore);
     },
     isInvalidNumberCertificate() {
-      if (this.car.numberCertificate) {
-        if (!isValid(this.car.numberCertificate, 7, 99, regNumbersMore)) {
+      if (this.car[6].value) {
+        if (!isValid(this.car[6].value, 7, 99, regNumbersMore)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorNumberCertificate = errorText;
           return false;

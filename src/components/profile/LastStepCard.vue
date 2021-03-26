@@ -6,23 +6,24 @@
       <el-button class="btn" type="text">Изменить</el-button>
     </div>
     <div
-      v-if="Array.isArray(info)"
+      v-if="typeText === 'image'"
       v-for="item in info"
       :key="item"
       class="flex">
       <img class="imgMiniAgregators" width="100" :src="'/assets/images/step2/'+item+'.jpeg'" alt="">
     </div>
     <div
-      v-else-if="info.length"
-      class="text">
-      {{info}}
-    </div>
-    <div
-      v-else
+      v-else-if="typeText === 'big'"
       v-for="item in info"
       :key="item"
       class="text item">
-      {{item}}
+      {{item.text}}
+      <p>{{item.value}}</p>
+    </div>
+    <div
+      v-else
+      class="text">
+      {{info}}
     </div>
   </el-card>
 </div>
@@ -34,6 +35,7 @@ export default {
   props: {
     header: String,
     info: String,
+    typeText: String,
   },
 };
 </script>
@@ -46,9 +48,11 @@ export default {
   display: inline-block;
 }
 .imgMiniAgregators {
+  object-fit: contain;
   padding: 14px;
   margin: 10px;
   border: 1px solid #01B6E7;
   border-radius: 15px;
+  height: 63px;
 }
 </style>
