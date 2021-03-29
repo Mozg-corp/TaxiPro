@@ -8,7 +8,7 @@ export default {
     // data
     phone: '',
     sms: null,
-    token: null,
+    token: 'F63EYKrnXG-witnZzUzU5Xy8PH3Y5qLQ',
     user: null,
     // special
     error: null,

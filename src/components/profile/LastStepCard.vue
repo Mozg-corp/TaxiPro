@@ -3,7 +3,7 @@
   <el-card shadow="always" class="box-card lastStepCard">
     <div class="card-header">
       <span>{{ header }}</span>
-      <el-button class="btn" type="text">Изменить</el-button>
+      <el-button @click="changeHandler()" class="btn" type="text">Изменить</el-button>
     </div>
     <div
       v-if="typeText === 'image'"
@@ -26,16 +26,38 @@
       {{info}}
     </div>
   </el-card>
+  <el-dialog
+    title="Проверьте данные"
+    v-model="onChangeHandler"
+    width="40%">
+    <input type="text" :value="info">
+    <template #footer>
+    <span class="dialog-footer">
+      <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
+      <el-button type="warning" @click="onChangeHandler = false">Изменить</el-button>
+    </span>
+    </template>
+  </el-dialog>
 </div>
 </template>
 
 <script>
 export default {
   name: 'LastStepCard',
+  data() {
+    return {
+      onChangeHandler: false,
+    };
+  },
   props: {
     header: String,
     info: String,
     typeText: String,
+  },
+  methods: {
+    changeHandler() {
+      this.onChangeHandler = true;
+    },
   },
 };
 </script>

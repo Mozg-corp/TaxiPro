@@ -135,6 +135,7 @@ const sendCode = ({ commit, getters }, code) => {
   })
     .then(({ data }) => {
       if (data.success) {
+        console.log(data);
         commit(MT.SET_TOKEN, data.user && data.user.token ? data.user.token : null);
         commit(MT.SET_USER, data.user);
         commit(MT.SET_PHONE, null);
