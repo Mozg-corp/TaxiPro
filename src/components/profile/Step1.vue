@@ -155,7 +155,7 @@
     <div class="btn_step">
       <router-link
         :to="{ name: 'Step2' }"
-        class="button routerLink"
+        class="button routerLink "
       @click="setFirstStep"
       >
         Выбрать тариф {{ tariffName }}
@@ -204,6 +204,7 @@ export default {
 }
 .tariffs {
   display: flex;
+  overflow: scroll;
 }
 .tariff{
   min-width: 350px;
@@ -288,7 +289,7 @@ export default {
 
 .btn_step {
   text-align: center;
-  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .flex {

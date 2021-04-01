@@ -8,6 +8,8 @@ const getCar = (s) => s.registrationData.car;
 const getLicense = (s) => s.registrationData.license;
 const getRegistrationData = (s) => s.registrationData;
 const getAgregatorsToAPI = (s) => s.registrationData.agregators.value;
+const getAllAgregators = (s) => s.allAgregators;
+const getAllTariffs = (s) => s.allTariffs;
 
 export default {
   getTariffName,
@@ -19,4 +21,6 @@ export default {
   getRegistrationData,
   getAgregatorsToAPI,
   getTariffNameToAPI,
+  getAllAgregators,
+  getAllTariffs,
 };

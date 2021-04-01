@@ -137,7 +137,7 @@
       </div>
     </div>
   </div>
-  <div class="btn_step">
+  <div>
     <router-link
       :to="{ name: 'Step4' }"
       class="button routerLink"

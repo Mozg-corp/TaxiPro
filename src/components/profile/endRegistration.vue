@@ -9,6 +9,8 @@
       <LastStepCard
       :header="'Номер телефона'"
       :info="'+'+Phone"
+      :isChanged="false"
+      :typeText="'Phone'"
       ></LastStepCard>
         <LastStepCard
           v-for="item in Data"
@@ -16,6 +18,7 @@
           :header="item.text"
           :typeText="item.type"
           :info="item.value"
+          :isChanged="true"
         ></LastStepCard>
     </div>
     <router-link :to="{ name: 'endRegistration' }" class="button routerLink">

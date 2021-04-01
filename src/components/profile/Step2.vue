@@ -70,7 +70,7 @@
         </label>
       </div>
     </div>
-    <div class="btn_step">
+    <div>
       <router-link class="routerLink" :to="{ name: 'Step3' }">
         <button
           @click="setSecondStep"

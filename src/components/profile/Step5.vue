@@ -133,7 +133,7 @@
       </div>
     </div>
   </div>
-  <div class="btn_step">
+  <div>
     <router-link :to="{ name: 'endRegistration' }"  class="button routerLink">
       <button
         @click="setFiveStep"
