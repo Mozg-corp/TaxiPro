@@ -162,8 +162,8 @@ export default {
       return isValid(this.driverLessons[1].value, 9, 11, regDate);
     },
     isInvalidWhenDriverLessonsGive() {
-      if (this.driverLessons[2].value) {
-        if (!isValid(this.driverLessons[2].value, 9, 11, regDate)) {
+      if (this.driverLessons[1].value) {
+        if (!isValid(this.driverLessons[1].value, 9, 11, regDate)) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.errorDriverLessonsGive = errorDate;
           return false;

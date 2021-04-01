@@ -19,28 +19,32 @@ export default {
         htmlId: 'premium',
       },
     ],
-    allAgregators: [
-      {
+    allAgregators: {
+      gett: {
         title: 'gett',
         htmlId: 'gett',
         img: '/assets/images/step2/gett.jpeg',
+        isChecked: false,
       },
-      {
+      yandexTaxi: {
         title: 'yandexTaxi',
         htmlId: 'yandexTaxi',
         img: '/assets/images/step2/yandexTaxi.jpeg',
+        isChecked: false,
       },
-      {
+      citymobile: {
         title: 'citymobile',
         htmlId: 'citymobile',
         img: '/assets/images/step2/citymobile.jpeg',
+        isChecked: false,
       },
-      {
+      uber: {
         title: 'uber',
         htmlId: 'uber',
         img: '/assets/images/step2/uber.jpeg',
+        isChecked: false,
       },
-    ],
+    },
     registrationData: {
       tariffName: {
         type: 'tariff',
@@ -51,7 +55,6 @@ export default {
         type: 'agregators',
         text: 'Агрегаторы',
         value: [],
-        path: '',
       },
       passport: {
         type: 'passport',

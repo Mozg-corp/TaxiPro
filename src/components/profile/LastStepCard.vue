@@ -21,8 +21,7 @@
         class="flex"
       >
         <img
-          class="imgMiniAgregators"
-          width="100"
+          class="imgMiniAgregators imgMiniAgregators_borderBlue"
           :src="'/assets/images/step2/'+item+'.jpeg'"
           alt=""
         >
@@ -74,19 +73,19 @@
       class="popupFlexLabel"
     >
       <div
-        v-for="item in allAgregators"
-        :key="item"
+        v-for="obj in allAgregators"
+        :key="obj"
         class="flex">
         <input
           type="checkbox"
           class="inputNone"
-          :id="item.id"
+          :id="obj.htmlId"
+          v-model="obj.isChecked"
         >
-        <label :for="item.id">
+        <label :for="obj.htmlId">
           <img
-            height="50"
-            width="100"
-            :src="item.img"
+            class="imgMiniAgregators"
+            :src="obj.img"
             alt=""
           >
         </label>
@@ -132,7 +131,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+#uber:checked + label img,
+#yandexTaxi:checked + label .imgMiniAgregators,
+#citymobile:checked + label .imgMiniAgregators,
+#gett:checked + label .imgMiniAgregators,{
+  border: 1px solid #01B6E7;
+}
+
 .popupFlexLabel {
   display: flex;
   justify-content: space-around;
@@ -147,8 +153,12 @@ export default {
   object-fit: contain;
   padding: 14px;
   margin: 10px;
-  border: 1px solid #01B6E7;
   border-radius: 15px;
+  border: 1px solid #000;
   height: 63px;
+  width: 100px;
+  &_borderBlue {
+    border: 1px solid #01B6E7;
+  }
 }
 </style>

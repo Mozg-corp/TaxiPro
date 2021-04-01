@@ -32,7 +32,6 @@ export default {
 
     sendPhoneHandler() {
       if (this.phone.length !== 10) return;
-
       this.sendPhone(`7${this.phone}`);
     },
   },

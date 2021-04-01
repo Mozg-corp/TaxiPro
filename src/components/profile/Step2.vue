@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="stepNumber">
+    <div @click="setSecondStep" class="stepNumber">
       <div class="stepNumber__text">
         Шаг <strong>2</strong>/5
       </div>
