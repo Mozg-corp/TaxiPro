@@ -37,7 +37,8 @@
         id="start"
         v-model="tariffName"
         value="Старт"
-        checked>
+        checked
+      >
       <label for="start">
       <div class="tariff">
         <div class="tariff__block">

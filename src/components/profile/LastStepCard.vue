@@ -91,6 +91,30 @@
         </label>
       </div>
     </div>
+    <div
+      v-else
+      class="popupFlexLabel"
+    >
+      <div
+        class="flex"
+        v-for="tariff in allTariffs"
+        :key="tariff.htmlId"
+      >
+        <input
+          type="radio"
+          class="inputNone"
+          :id="tariff.htmlId"
+          v-model="tariffName"
+          :value="tariff.title"
+        >
+        <label
+          :for="tariff.htmlId"
+          class="labelPopupTariff"
+        >
+          {{ tariff.title }}
+        </label>
+      </div>
+    </div>
     <template #footer>
     <span class="dialog-footer">
       <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
@@ -109,6 +133,7 @@ export default {
   data() {
     return {
       onChangeHandler: false,
+      tariffName: '',
     };
   },
   props: {
@@ -126,12 +151,31 @@ export default {
     ...mapGetters({
       allTariffs: 'profile/getAllTariffs',
       allAgregators: 'profile/getAllAgregators',
+      getTariff: 'profile/getTariff',
     }),
+  },
+  mounted() {
+    this.tariffName = this.getTariff;
   },
 };
 </script>
 
 <style lang="scss">
+
+#start:checked + label,
+#comfort:checked + label,
+#premium:checked + label,{
+  background: #48B5E2;
+  color: #fff;
+}
+.labelPopupTariff {
+  background: #fff;
+  color: #48B5E2;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 #uber:checked + label img,
 #yandexTaxi:checked + label .imgMiniAgregators,
 #citymobile:checked + label .imgMiniAgregators,

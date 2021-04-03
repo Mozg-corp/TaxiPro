@@ -5,6 +5,7 @@ const getAgregators = (s) => s.registrationData.agregators;
 const getPassport = (s) => s.registrationData.passport;
 const getDriverLessons = (s) => s.registrationData.driverLessons;
 const getCar = (s) => s.registrationData.car;
+const getTariff = (s) => s.registrationData.tariffName.value;
 const getLicense = (s) => s.registrationData.license;
 const getRegistrationData = (s) => s.registrationData;
 const getAgregatorsToAPI = (s) => s.registrationData.agregators.value;
@@ -23,4 +24,5 @@ export default {
   getTariffNameToAPI,
   getAllAgregators,
   getAllTariffs,
+  getTariff,
 };
