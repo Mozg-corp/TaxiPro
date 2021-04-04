@@ -118,7 +118,7 @@
     <template #footer>
     <span class="dialog-footer">
       <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
-      <el-button type="success" @click="onChangeHandler = false">Сохранить</el-button>
+      <el-button type="success" @click="saveChangesHandler">Сохранить</el-button>
     </span>
     </template>
   </el-dialog>
@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'LastStepCard',
@@ -143,8 +143,16 @@ export default {
     isChanged: Boolean,
   },
   methods: {
+    ...mapActions({
+      setFirstStepToState: 'profile/setFirstStepToState',
+    }),
     changeHandler() {
       this.onChangeHandler = true;
+    },
+    saveChangesHandler(func, data) {
+      // this.setFirstStepToState(this.tariffName);
+      func(data);
+      this.onChangeHandler = false;
     },
   },
   computed: {
