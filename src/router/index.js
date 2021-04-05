@@ -19,6 +19,8 @@ import Step5 from '@/components/profile/Step5';
 import endRegistration from '@/components/profile/endRegistration';
 // eslint-disable-next-line import/extensions
 import Welcome from '@/components/profile/Welcome';
+// eslint-disable-next-line import/extensions
+import Step6 from '@/components/profile/Step6';
 
 const routes = [
   {
@@ -75,6 +77,11 @@ const routes = [
         path: '/account/profile/endRegistration',
         name: 'endRegistration',
         component: endRegistration,
+      },
+      {
+        path: '/account/profile/step-6',
+        name: 'Step6',
+        component: Step6,
       },
     ],
   },

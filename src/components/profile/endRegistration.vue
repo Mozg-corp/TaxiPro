@@ -21,7 +21,7 @@
           :isChanged="true"
         ></LastStepCard>
     </div>
-    <router-link :to="{ name: 'endRegistration' }" class="button routerLink">
+    <router-link :to="{ name: 'Step6' }" class="button routerLink">
       <button @click="sendData" class="button routerLink">
         Отправить данные
       </button>
@@ -60,6 +60,7 @@ export default {
       });
       axios.post('/api/v1/agregators', agregatorsToApi)
         .then((response) => {
+          this.$router.push('/');
           console.log(response);
           const objProfileToAPI = JSON.stringify({
             firstname: this.Data.passport.value[0].value,
