@@ -32,11 +32,9 @@ export default {
     }),
   },
   mounted() {
-    console.log(this.getPhone);
     if (this.getPhone === null) {
       this.fixedPhone('');
     }
-    console.log(this.getPhone);
     const el = this.$el.querySelector('.login-phone__input');
     el.dataset.number = this.getPhone.substr(1);
     el.dataset.phone = convertNumberToPhone(el.dataset.number);

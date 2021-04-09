@@ -2,7 +2,7 @@
   <div class="card">
     <div @click="setSecondStep" class="stepNumber">
       <div class="stepNumber__text">
-        Шаг <strong>2</strong>/5
+        Шаг <strong>2</strong>/6
       </div>
     </div>
     <div class="choiceTaxi">
@@ -67,6 +67,20 @@
             <img class="agregator__img" src="/assets/images/step2/citymobile.jpeg" alt="ситимобил">
           </div>
         </div>
+        </label>
+        <input
+          class="inputNone"
+          type="checkbox"
+          id="didi"
+          v-model="agregators"
+          value="didi">
+        <label for="didi">
+          <div class="choiceTaxi__block">
+            <div class="agregator">
+              <div class="agregator__circle"></div>
+              <img class="agregator__img" src="/assets/images/step2/didi.png" alt="didi">
+            </div>
+          </div>
         </label>
       </div>
     </div>
@@ -138,28 +152,19 @@ export default {
     height: 200px;
   }
 }
-#gett:checked + label .choiceTaxi__block .agregator {
-  border: 2px solid #48B5E2;
-}
-#gett:checked + label .choiceTaxi__block .agregator .agregator__circle {
-  background: #48B5E2;
-}
-#uber:checked + label .choiceTaxi__block .agregator {
-  border: 2px solid #48B5E2;
-}
-#uber:checked + label .choiceTaxi__block .agregator .agregator__circle {
-  background: #48B5E2;
-}
-#yandexTaxi:checked + label .choiceTaxi__block .agregator {
-  border: 2px solid #48B5E2;
-}
-#yandexTaxi:checked + label .choiceTaxi__block .agregator .agregator__circle {
-  background: #48B5E2;
-}
+#gett:checked + label .choiceTaxi__block .agregator,
+#uber:checked + label .choiceTaxi__block .agregator,
+#yandexTaxi:checked + label .choiceTaxi__block .agregator,
+#didi:checked + label .choiceTaxi__block .agregator,
 #citymobile:checked + label .choiceTaxi__block .agregator {
   border: 2px solid #48B5E2;
 }
-#citymobile:checked + label .choiceTaxi__block .agregator .agregator__circle {
-  background: #48B5E2;
+#gett:checked + label .choiceTaxi__block .agregator .agregator__circle,
+#uber:checked + label .choiceTaxi__block .agregator .agregator__circle,
+#yandexTaxi:checked + label .choiceTaxi__block .agregator .agregator__circle,
+#citymobile:checked + label .choiceTaxi__block .agregator .agregator__circle,
+#didi:checked + label .choiceTaxi__block .agregator .agregator__circle {
+  background: url(/assets/images/step2/Group35.png);
+  border: none;
 }
 </style>

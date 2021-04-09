@@ -2,7 +2,7 @@
 <div class="card">
   <div class="stepNumber">
     <div class="stepNumber__text">
-      Шаг <strong>5</strong>/5
+      Шаг <strong>5</strong>/6
     </div>
   </div>
   <div class="insertData">

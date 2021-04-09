@@ -18,7 +18,7 @@
       <div
         v-for="item in info"
         :key="item"
-        class="flex"
+        class="inlineBlock"
       >
         <img
           class="imgMiniAgregators imgMiniAgregators_borderBlue"
@@ -40,7 +40,7 @@
         :key="item"
         class="text item"
       >
-        <p>{{item.text}}</p>
+        <p>{{item.labelText}}</p>
       {{item.value}}
       </div>
     </div>
@@ -75,7 +75,7 @@
       <div
         v-for="obj in allAgregators"
         :key="obj"
-        class="flex">
+        class="inlineBlock">
         <input
           type="checkbox"
           class="inputNone"
@@ -96,7 +96,7 @@
       class="popupFlexLabel"
     >
       <div
-        class="flex"
+        class="inlineBlock"
         v-for="tariff in allTariffs"
         :key="tariff.htmlId"
       >
@@ -170,9 +170,9 @@ export default {
 
 <style lang="scss">
 
-#start:checked + label,
-#comfort:checked + label,
-#premium:checked + label,{
+#start:checked + .labelPopupTariff,
+#comfort:checked + .labelPopupTariff,
+#premium:checked + .labelPopupTariff,{
   background: #48B5E2;
   color: #fff;
 }
@@ -184,7 +184,7 @@ export default {
   cursor: pointer;
 }
 
-#uber:checked + label img,
+#uber:checked + label .imgMiniAgregators,
 #yandexTaxi:checked + label .imgMiniAgregators,
 #citymobile:checked + label .imgMiniAgregators,
 #gett:checked + label .imgMiniAgregators,{
@@ -198,7 +198,7 @@ export default {
 .lastStepCard {
   margin: 10px 0;
 }
-.flex {
+.inlineBlock {
   display: inline-block;
 }
 .imgMiniAgregators {

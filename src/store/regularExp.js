@@ -7,6 +7,9 @@ export const regNumbersMore = /^[0-9#№ ]+$/;
 // буквы и символы
 export const regName = /^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ\-' ]+[a-zA-Zа-яА-ЯёЁ']?$/;
 export const regSurname = /^s*[A-ZА-Яa-zа-яёЁ][A-ZА-Яa-zа-яёЁ]+([a-zа-яёЁ]+|-[A-ZА-Яa-zа-яёЁ][A-ZА-Яa-zа-яёЁ]+)?s*$/u;
+export const regPatronymic = /^[a-zA-Z-а-яА-ЯёЁ\-' ]*$/;
+export const regStreet = /^[A-Za-zА-Яа-я0-9-]+$/;
+export const regHouseNumber = /^[A-Za-zА-Яа-я0-9-\/\\]+$/;
 
 // буквы и цифры и символы
 export const regLettersNumbersOnly = /^[A-Za-zА-Яа-я0-9]+$/;
@@ -26,4 +29,7 @@ export default {
   regNumbersOnly,
   regLettersNumbersOnly,
   regNumbersMore,
+  regPatronymic,
+  regStreet,
+  regHouseNumber,
 };

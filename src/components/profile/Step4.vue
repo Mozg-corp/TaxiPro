@@ -2,7 +2,7 @@
 <div class="card">
   <div class="stepNumber">
     <div class="stepNumber__text">
-      Шаг <strong>4</strong>/5
+      Шаг <strong>4</strong>/6
     </div>
   </div>
   <div class="insertData">
@@ -11,7 +11,10 @@
     <div class="insertData__stepThree">
       <div class="inputStepThree">
         <div class="inputForSteps">
-          <label class="inputForSteps__label" :for="data[0].id">{{ data[0].labelText }}</label>
+          <label
+            class="inputForSteps__label"
+            :for="data[0].id">{{ data[0].labelText }}
+          </label>
           <input class="inputForSteps__input"
                  :class="{'inputForSteps__correct': isValidDriverNumbers,
                  'inputForSteps__error': !isInvalidDriverNumbers}"
@@ -115,16 +118,19 @@ export default {
           id: 'driverNumbers',
           placeholder: '2233 444555',
           labelText: 'Сериия и номер В.У.',
+          value: '',
         },
         {
           id: 'whenDriverLessonsGive',
           placeholder: '01/01/2020',
           labelText: 'Дата выдачи',
+          value: '',
         },
         {
           id: 'whenDriverLessonsClose',
           placeholder: '01/01/2000',
           labelText: 'Срок выдачи',
+          value: '',
         },
       ],
     };
