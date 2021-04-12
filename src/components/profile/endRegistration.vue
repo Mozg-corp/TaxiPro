@@ -55,10 +55,20 @@ export default {
   },
   methods: {
     sendData() {
-      const agregatorsToApi = JSON.stringify({
-        name: this.agregatorsObj.join(' '),
+      // eslint-disable-next-line camelcase
+      const users_id = 4; // сделать user id
+      const body = [];
+      this.agregatorsObj.forEach((el, index) => {
+        body.push({
+          users_id,
+          agregators_id: index,
+        });
       });
-      axios.post('/api/v1/agregators', agregatorsToApi)
+      const agregatorsToApi = JSON.stringify(body);
+      console.log(agregatorsToApi);
+      axios.post('/api/v1/user-agregator/batch', agregatorsToApi, {
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
         .then((response) => {
           this.$router.push('/');
           console.log(response);

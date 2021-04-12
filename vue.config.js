@@ -1,4 +1,4 @@
-const serverUrl = 'http://menly.1site.space';
+const serverUrl = 'http://89.108.71.31:8000';
 
 module.exports = {
   devServer: {
