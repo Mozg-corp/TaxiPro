@@ -5,22 +5,26 @@ const setSecondStepToState = (state, agregators) => {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < agregators.length; i++) {
     if (i === 0) {
-      state.allAgregators.gett.isChecked = agregators[i] === 'gett';
-      state.allAgregators.yandexTaxi.isChecked = agregators[i] === 'yandexTaxi';
-      state.allAgregators.citymobile.isChecked = agregators[i] === 'citymobile';
-      state.allAgregators.uber.isChecked = agregators[i] === 'uber';
+      state.allAgregators.gett.isChecked = agregators[i] === '0';
+      state.allAgregators.yandexTaxi.isChecked = agregators[i] === '1';
+      state.allAgregators.citymobile.isChecked = agregators[i] === '2';
+      state.allAgregators.uber.isChecked = agregators[i] === '3';
+      state.allAgregators.uber.isChecked = agregators[i] === '4';
     } else {
-      if (agregators[i] === 'gett') {
+      if (agregators[i] === '0') {
         state.allAgregators.gett.isChecked = true;
       }
-      if (agregators[i] === 'yandexTaxi') {
+      if (agregators[i] === '1') {
         state.allAgregators.yandexTaxi.isChecked = true;
       }
-      if (agregators[i] === 'citymobile') {
+      if (agregators[i] === '2') {
         state.allAgregators.citymobile.isChecked = true;
       }
-      if (agregators[i] === 'uber') {
+      if (agregators[i] === '3') {
         state.allAgregators.uber.isChecked = true;
+      }
+      if (agregators[i] === '4') {
+        state.allAgregators.didi.isChecked = true;
       }
     }
   }

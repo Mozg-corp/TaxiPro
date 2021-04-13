@@ -13,12 +13,12 @@
           type="checkbox"
           id="gett"
           v-model="agregators"
-          value="gett">
+          value="0">
         <label for="gett">
           <div class="choiceTaxi__block">
             <div class="agregator">
               <div class="agregator__circle"></div>
-              <img class="agregator__img" src="/assets/images/step2/gett.jpeg" alt="gett">
+              <img class="agregator__img" src="/assets/images/step2/0.jpeg" alt="gett">
             </div>
           </div>
         </label>
@@ -27,12 +27,12 @@
           type="checkbox"
           id="uber"
           v-model="agregators"
-          value="uber">
+          value="3">
         <label for="uber">
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/uber.jpeg" alt="uber">
+            <img class="agregator__img" src="/assets/images/step2/3.jpeg" alt="uber">
           </div>
         </div>
         </label>
@@ -41,14 +41,14 @@
           type="checkbox"
           id="yandexTaxi"
           v-model="agregators"
-          value="yandexTaxi">
+          value="1">
         <label for="yandexTaxi">
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
             <img
               class="agregator__img"
-              src="/assets/images/step2/yandexTaxi.jpeg"
+              src="/assets/images/step2/1.jpeg"
               alt="Яндекс Такси"
             >
           </div>
@@ -59,12 +59,12 @@
           type="checkbox"
           id="citymobile"
           v-model="agregators"
-          value="citymobile">
+          value="2">
         <label for="citymobile">
         <div class="choiceTaxi__block">
           <div class="agregator">
             <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/citymobile.jpeg" alt="ситимобил">
+            <img class="agregator__img" src="/assets/images/step2/2.jpeg" alt="ситимобил">
           </div>
         </div>
         </label>
@@ -73,12 +73,12 @@
           type="checkbox"
           id="didi"
           v-model="agregators"
-          value="didi">
+          value="4">
         <label for="didi">
           <div class="choiceTaxi__block">
             <div class="agregator">
               <div class="agregator__circle"></div>
-              <img class="agregator__img" src="/assets/images/step2/didi.png" alt="didi">
+              <img class="agregator__img" src="/assets/images/step2/4.jpeg" alt="didi">
             </div>
           </div>
         </label>

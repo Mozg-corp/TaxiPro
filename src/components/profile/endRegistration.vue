@@ -34,18 +34,19 @@
 import LastStepCard from '@/components/profile/LastStepCard';
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+import { getFromStorage } from '@/store/libs';
 
 export default {
   name: 'endRegistration',
   data() {
     return {
+      Phone: getFromStorage('phone'),
     };
   },
   computed: {
     ...mapGetters({
       Data: 'profile/getRegistrationData',
       token: 'authorization/getToken',
-      Phone: 'authorization/getPhone',
       tariff: 'profile/getTariffNameToAPI',
       agregatorsObj: 'profile/getAgregatorsToAPI',
     }),
@@ -56,44 +57,50 @@ export default {
   methods: {
     sendData() {
       // eslint-disable-next-line camelcase
-      const users_id = 4; // сделать user id
+      const users_id = getFromStorage('users_id');
       const body = [];
-      this.agregatorsObj.forEach((el, index) => {
+      this.agregatorsObj.forEach((el) => {
         body.push({
           users_id,
-          agregators_id: index,
+          agregators_id: el,
         });
       });
-      const agregatorsToApi = JSON.stringify(body);
-      console.log(agregatorsToApi);
-      axios.post('/api/v1/user-agregator/batch', agregatorsToApi, {
+      axios.post('/api/v1/user-agregator/batch', body, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
         .then((response) => {
-          this.$router.push('/');
+          const birthdate = this.Data.passport.value[3].value.replace(/[\/]/g, '.');
+          const passport_date = this.Data.passport.value[6].value.replace(/[\/]/g, '.');
+          const license_date = this.Data.driverLessons.value[1].value.replace(/[\/]/g, '.');
+          const license_expire = this.Data.driverLessons.value[2].value.replace(/[\/]/g, '.');
           console.log(response);
-          const objProfileToAPI = JSON.stringify({
+          const objProfileToAPI = {
             firstname: this.Data.passport.value[0].value,
-            secondname: this.Data.passport.value[1].value,
-            lastname: this.Data.passport.value[2].value,
-            birthdate: this.Data.passport.value[3].value,
+            secondname: this.Data.passport.value[1].value ? this.Data.passport.value[1].value : 'Иванович',
+            lastname: this.Data.passport.value[2].value ? this.Data.passport.value[2].value : 'Иванов',
+            birthdate,
             phone: this.Phone,
             passport_series: this.Data.passport.value[4].value.substring(0, 4),
             passport_number: this.Data.passport.value[4].value.substring(5),
             passport_giver: this.Data.passport.value[5].value,
-            passport_date: this.Data.passport.value[6].value,
-            registration_address: this.Data.passport.value[7].value,
+            passport_date,
+            registration_address: this.Data.passport.value[7].value
+            + this.Data.passport.value[8].value + this.Data.passport.value[9].value
+              + this.Data.passport.value[10].value + this.Data.passport.value[11].value,
             license_series: this.Data.driverLessons.value[0].value.substring(0, 4),
             license_number: this.Data.driverLessons.value[0].value.substring(5),
-            license_date: this.Data.driverLessons.value[1].value,
-            license_expire: this.Data.driverLessons.value[2].value,
-            user_id: 14,
-          });
-          axios.post('/api/v1/profiles', objProfileToAPI)
+            license_date,
+            license_expire,
+            user_id: users_id,
+          };
+          console.log(JSON.stringify(objProfileToAPI));
+          axios.post('/api/v1/profiles', objProfileToAPI, {
+            headers: { Authorization: `Bearer ${this.token}` },
+          })
             // eslint-disable-next-line no-shadow
             .then((response) => {
               console.log(response);
-              const objCarToAPI = JSON.stringify({
+              const objCarToAPI = {
                 brand: this.Data.car.value[0].value,
                 model: this.Data.car.value[1].value,
                 year: this.Data.car.value[2].value,
@@ -102,35 +109,39 @@ export default {
                 vin: this.Data.car.value[5].value,
                 sts: this.Data.car.value[6].value,
                 license: this.Data.license.value,
-                id_users: 14,
-              });
-              axios.post('/api/v1/cars', objCarToAPI)
+                id_users: users_id,
+              };
+              axios.post('/api/v1/cars', objCarToAPI, {
+                headers: { Authorization: `Bearer ${this.token}` },
+              })
                 // eslint-disable-next-line no-shadow
                 .then((response) => {
                   console.log(response);
-                  const objTariffToAPI = JSON.stringify({
-                    id_tariffs: this.tariff,
-                    id_users: 14,
-                  });
-                  axios.post('/api/v1/subscriptions', objTariffToAPI)
-                    // eslint-disable-next-line no-shadow
-                    .then((response) => {
-                      console.log(response);
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                    });
+                  // const objTariffToAPI = {
+                  //   id_tariffs: this.tariff,
+                  //   id_users: users_id,
+                  // };
+                  // axios.post('/api/v1/subscriptions', objTariffToAPI, {
+                  //   headers: { Authorization: `Bearer ${this.token}` },
+                  // })
+                  //   // eslint-disable-next-line no-shadow
+                  //   .then((response) => {
+                  //     console.log(response);
+                  //   })
+                  //   .catch((error) => {
+                  //     console.log(error.response);
+                  //   });
                 })
                 .catch((error) => {
-                  console.log(error);
+                  console.log(error.response);
                 });
             })
             .catch((error) => {
-              console.log(error);
+              console.log(error.response);
             });
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     },
   },

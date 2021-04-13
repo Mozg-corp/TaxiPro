@@ -187,7 +187,8 @@ export default {
 #uber:checked + label .imgMiniAgregators,
 #yandexTaxi:checked + label .imgMiniAgregators,
 #citymobile:checked + label .imgMiniAgregators,
-#gett:checked + label .imgMiniAgregators,{
+#gett:checked + label .imgMiniAgregators,
+#didi:checked + label .imgMiniAgregators{
   border: 1px solid #01B6E7;
 }
 
