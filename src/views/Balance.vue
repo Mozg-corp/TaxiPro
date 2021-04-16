@@ -1,6 +1,6 @@
 <template>
   <div class="container history">
-    <h1>История вывода средств</h1>
+    <h1>Баланс</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'History',
+  name: 'Balance',
 
   date: () => ({
     //

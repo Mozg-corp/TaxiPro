@@ -1,6 +1,11 @@
 <template>
   <div class="container account">
-    <h1>Личный кабинет</h1>
+    <nav>
+      <router-link :to="{ path: '/account' }">Главная</router-link>
+      <router-link :to="{ path: '/account/balance' }">Баланс</router-link>
+      <router-link :to="{ path: '/account/withdrawal' }">Вывод средств</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 

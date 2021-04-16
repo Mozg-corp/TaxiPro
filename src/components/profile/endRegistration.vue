@@ -21,11 +21,11 @@
           :isChanged="true"
         ></LastStepCard>
     </div>
-    <router-link :to="{ name: 'Step6' }" class="button routerLink">
+    <a class="button routerLink">
       <button @click="sendData" class="button routerLink">
         Отправить данные
       </button>
-    </router-link>
+    </a>
   </div>
 </template>
 
@@ -35,6 +35,8 @@ import LastStepCard from '@/components/profile/LastStepCard';
 import { mapGetters } from 'vuex';
 import axios from 'axios';
 import { getFromStorage } from '@/store/libs';
+// eslint-disable-next-line import/no-cycle
+import router from '@/router';
 
 export default {
   name: 'endRegistration',
@@ -59,6 +61,15 @@ export default {
       // eslint-disable-next-line camelcase
       const users_id = getFromStorage('users_id');
       const body = [];
+      // eslint-disable-next-line no-unused-vars
+      let idTariffs = null;
+      if (this.tariff === 'Старт') {
+        idTariffs = 1;
+      } else if (this.tariff === 'Комфорт') {
+        idTariffs = 2;
+      } else {
+        idTariffs = 3;
+      }
       this.agregatorsObj.forEach((el) => {
         body.push({
           users_id,
@@ -70,8 +81,11 @@ export default {
       })
         .then((response) => {
           const birthdate = this.Data.passport.value[3].value.replace(/[\/]/g, '.');
+          // eslint-disable-next-line camelcase
           const passport_date = this.Data.passport.value[6].value.replace(/[\/]/g, '.');
+          // eslint-disable-next-line camelcase
           const license_date = this.Data.driverLessons.value[1].value.replace(/[\/]/g, '.');
+          // eslint-disable-next-line camelcase
           const license_expire = this.Data.driverLessons.value[2].value.replace(/[\/]/g, '.');
           console.log(response);
           const objProfileToAPI = {
@@ -117,20 +131,22 @@ export default {
                 // eslint-disable-next-line no-shadow
                 .then((response) => {
                   console.log(response);
-                  // const objTariffToAPI = {
-                  //   id_tariffs: this.tariff,
-                  //   id_users: users_id,
-                  // };
-                  // axios.post('/api/v1/subscriptions', objTariffToAPI, {
-                  //   headers: { Authorization: `Bearer ${this.token}` },
-                  // })
-                  //   // eslint-disable-next-line no-shadow
-                  //   .then((response) => {
-                  //     console.log(response);
-                  //   })
-                  //   .catch((error) => {
-                  //     console.log(error.response);
-                  //   });
+                  const objTariffToAPI = {
+                    id_tariffs: idTariffs,
+                    id_users: users_id,
+                  };
+                  console.log(objTariffToAPI);
+                  axios.post('/api/v1/subscriptions', objTariffToAPI, {
+                    headers: { Authorization: `Bearer ${this.token}` },
+                  })
+                    // eslint-disable-next-line no-shadow
+                    .then((response) => {
+                      console.log(response);
+                      router.push({ name: 'Step6' });
+                    })
+                    .catch((error) => {
+                      console.log(error.response);
+                    });
                 })
                 .catch((error) => {
                   console.log(error.response);

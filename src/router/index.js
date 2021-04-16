@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Account from '@/views/Account.vue';
-import History from '@/views/History.vue';
+import Balance from '@/views/Balance.vue';
 import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
@@ -21,17 +21,31 @@ import endRegistration from '@/components/profile/endRegistration';
 import Welcome from '@/components/profile/Welcome';
 // eslint-disable-next-line import/extensions
 import Step6 from '@/components/profile/Step6';
+// eslint-disable-next-line import/extensions
+import Index from '@/components/account/Index';
 
 const routes = [
   {
     path: '/account',
     name: 'Account',
     component: Account,
-  },
-  {
-    path: '/account/history',
-    name: 'History',
-    component: History,
+    children: [
+      {
+        path: '/account',
+        name: 'index',
+        component: Index,
+      },
+      {
+        path: '/account/balance',
+        name: 'Balance',
+        component: Balance,
+      },
+      {
+        path: '/account/withdrawal',
+        name: 'Withdrawal',
+        component: Withdrawal,
+      },
+    ],
   },
   {
     path: '/account/login',
@@ -84,11 +98,6 @@ const routes = [
         component: Step6,
       },
     ],
-  },
-  {
-    path: '/account/withdrawal',
-    name: 'Withdrawal',
-    component: Withdrawal,
   },
   {
     path: '/landing',
