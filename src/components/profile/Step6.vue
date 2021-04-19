@@ -264,8 +264,6 @@ export default {
   &__header {
     margin: 20px;
   }
-  &__passport{}
-  &__driverLesson {}
   &__footer {
     text-align: center;
     color: #48B5E2;

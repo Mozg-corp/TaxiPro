@@ -189,7 +189,7 @@
                    type="text"
                    :id="data[11].id"
                    :placeholder="data[11].placeholder"
-                   v-model.lazy="data[11].value"
+                   v-model="data[11].value"
             >
             <span class="inputForSteps__errorText"
                   v-if="errorFlat">

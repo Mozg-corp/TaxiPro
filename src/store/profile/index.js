@@ -56,7 +56,6 @@ export default {
         isChecked: false,
       },
     },
-    users_id: null,
     registrationData: {
       tariffName: {
         type: 'tariff',

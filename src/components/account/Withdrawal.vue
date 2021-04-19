@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/vars", "../styles/mixins";
+@import "../../styles/vars", "../../styles/mixins";
 
 .withdrawal {
   @include flex-column;

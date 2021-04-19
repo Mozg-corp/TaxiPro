@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Account from '@/views/Account.vue';
-import Balance from '@/views/Balance.vue';
+import Balance from '@/components/account/Balance.vue';
 import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
-import Withdrawal from '@/views/Withdrawal.vue';
+import Withdrawal from '@/components/account/Withdrawal.vue';
 // eslint-disable-next-line import/extensions
 import Step1 from '@/components/profile/Step1';
 // eslint-disable-next-line import/extensions

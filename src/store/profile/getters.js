@@ -1,6 +1,10 @@
 const getTariffName = (s) => s.registrationData.tariffName;
 const getTariffNameToAPI = (s) => s.registrationData.tariffName.value;
 
+const getName = (s) => s.registrationData.passport.value[0].value;
+const getSurname = (s) => s.registrationData.passport.value[1].value;
+const getPatronymic = (s) => s.registrationData.passport.value[2].value;
+
 const getAgregators = (s) => s.registrationData.agregators;
 const getPassport = (s) => s.registrationData.passport;
 const getDriverLessons = (s) => s.registrationData.driverLessons;
@@ -25,4 +29,7 @@ export default {
   getAllAgregators,
   getAllTariffs,
   getTariff,
+  getPatronymic,
+  getSurname,
+  getName,
 };

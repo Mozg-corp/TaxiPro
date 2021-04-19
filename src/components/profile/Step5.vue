@@ -147,7 +147,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line import/extensions
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
 import {

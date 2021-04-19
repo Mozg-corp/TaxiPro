@@ -9,7 +9,7 @@ const setSecondStepToState = (state, agregators) => {
       state.allAgregators.yandexTaxi.isChecked = agregators[i] === '1';
       state.allAgregators.citymobile.isChecked = agregators[i] === '2';
       state.allAgregators.uber.isChecked = agregators[i] === '3';
-      state.allAgregators.uber.isChecked = agregators[i] === '4';
+      state.allAgregators.didi.isChecked = agregators[i] === '4';
     } else {
       if (agregators[i] === '0') {
         state.allAgregators.gett.isChecked = true;

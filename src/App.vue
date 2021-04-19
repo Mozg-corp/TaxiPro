@@ -1,6 +1,5 @@
 <template>
   <v-header></v-header>
-
   <main class="main">
     <router-view/>
   </main>

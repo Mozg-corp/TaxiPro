@@ -53,19 +53,47 @@
       v-if="typeText === 'license'"
     >
       <label :for="info">Номер лицензии</label>
-      <input :id="info" type="text" :value="info">
+      <input
+        :id="info"
+        type="text"
+        v-model="license"
+        :class="{'correctLastStep': isValidLicense,
+                 'inputForSteps__error': !isInvalidLicense}"
+      >
+      <div style="text-align: end">
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
+          <el-button
+            type="success"
+            @click="saveLicense(license)"
+          >
+            Сохранить
+          </el-button>
+        </span>
+      </div>
     </div>
     <div
       v-else-if="(typeText === 'passport')
-       || (typeText === 'driverLessons')
-       || (typeText === 'car')"
+      || (typeText === 'car')
+      || (typeText === 'driverLessons')"
     >
       <div
         v-for="item in info"
         :key="item"
       >
         <label :for="item.type">{{item.text}}</label>
-        <input :id="item.type" type="text" :value="item.value">
+        <input :id="item.type" type="text" v-model="item.value">
+      </div>
+      <div style="text-align: end">
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
+          <el-button
+            type="success"
+            @click="savePassport(Data)"
+          >
+            Сохранить
+          </el-button>
+        </span>
       </div>
     </div>
     <div
@@ -93,8 +121,8 @@
     </div>
     <div
       v-else
-      class="popupFlexLabel"
     >
+      <div class="popupFlexLabel">
       <div
         class="inlineBlock"
         v-for="tariff in allTariffs"
@@ -114,19 +142,27 @@
           {{ tariff.title }}
         </label>
       </div>
+      </div>
+      <div style="text-align: end; margin-top: 30px">
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
+          <el-button
+            type="success"
+            @click="saveTariff(tariffName)"
+          >
+            Сохранить
+          </el-button>
+        </span>
+      </div>
     </div>
-    <template #footer>
-    <span class="dialog-footer">
-      <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
-      <el-button type="success" @click="saveChangesHandler">Сохранить</el-button>
-    </span>
-    </template>
   </el-dialog>
 </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { isValid, regNumbersOnly } from '@/store/regularExp';
+import { errorText } from '@/store/errorsText';
 
 export default {
   name: 'LastStepCard',
@@ -134,6 +170,8 @@ export default {
     return {
       onChangeHandler: false,
       tariffName: '',
+      license: this.info,
+      Data: this.info,
     };
   },
   props: {
@@ -145,13 +183,30 @@ export default {
   methods: {
     ...mapActions({
       setFirstStepToState: 'profile/setFirstStepToState',
+      setThirdStepToState: 'profile/setThirdStepToState',
+      setFourStepToState: 'profile/setFourStepToState',
+      setFiveStepToState: 'profile/setFiveStepToState',
+      setLicenseToState: 'profile/setLicenseToState',
     }),
     changeHandler() {
       this.onChangeHandler = true;
     },
-    saveChangesHandler(func, data) {
-      // this.setFirstStepToState(this.tariffName);
-      func(data);
+    saveTariff(tariff) {
+      this.setFirstStepToState(tariff);
+      this.onChangeHandler = false;
+    },
+    saveLicense(data) {
+      this.setLicenseToState(data);
+      this.onChangeHandler = false;
+    },
+    savePassport(data) {
+      if (data.length === 12) {
+        this.setThirdStepToState(data);
+      } else if (data.length === 3) {
+        this.setFourStepToState(data);
+      } else {
+        this.setFiveStepToState(data);
+      }
       this.onChangeHandler = false;
     },
   },
@@ -161,6 +216,21 @@ export default {
       allAgregators: 'profile/getAllAgregators',
       getTariff: 'profile/getTariff',
     }),
+    isValidLicense() {
+      return isValid(this.license, 5, 20, regNumbersOnly);
+    },
+    isInvalidLicense() {
+      if (this.license) {
+        if (!isValid(this.license, 5, 20, regNumbersOnly)) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.errorLicense = errorText;
+          return false;
+        }
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.errorLicense = '';
+      return true;
+    },
   },
   mounted() {
     this.tariffName = this.getTariff;
@@ -213,5 +283,8 @@ export default {
   &_borderBlue {
     border: 1px solid #01B6E7;
   }
+}
+.correctLastStep {
+  border: 1px solid limegreen;
 }
 </style>
