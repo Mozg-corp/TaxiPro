@@ -98,25 +98,38 @@
     </div>
     <div
       v-else-if="typeText === 'agregators'"
-      class="popupFlexLabel"
     >
-      <div
-        v-for="obj in allAgregators"
-        :key="obj"
-        class="inlineBlock">
-        <input
-          type="checkbox"
-          class="inputNone"
-          :id="obj.htmlId"
-          v-model="obj.isChecked"
-        >
-        <label :for="obj.htmlId">
-          <img
-            class="imgMiniAgregators"
-            :src="obj.img"
-            alt=""
+      <div class="popupFlexLabel">
+        <div
+          v-for="obj in allAgregators"
+          :key="obj"
+          class="inlineBlock">
+          <input
+            type="checkbox"
+            class="inputNone"
+            :id="obj.htmlId"
+            v-model="obj.isChecked"
+            @change="eventInput(obj, info)"
           >
-        </label>
+          <label :for="obj.htmlId">
+            <img
+              class="imgMiniAgregators"
+              :src="obj.img"
+              alt=""
+            >
+          </label>
+        </div>
+      </div>
+      <div style="text-align: end">
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onChangeHandler = false">Отмена</el-button>
+          <el-button
+            type="success"
+            @click="saveAgregators(Data)"
+          >
+            Сохранить
+          </el-button>
+        </span>
       </div>
     </div>
     <div
@@ -181,8 +194,19 @@ export default {
     isChanged: Boolean,
   },
   methods: {
+    eventInput(data, d) {
+      const index = d.indexOf(data.id.toString());
+      if (data.isChecked) {
+        this.Data.push(data.id.toString());
+      } else if (index !== -1) {
+        // eslint-disable-next-line no-param-reassign
+        delete d[index];
+      }
+      return this.Data;
+    },
     ...mapActions({
       setFirstStepToState: 'profile/setFirstStepToState',
+      secondStepToState: 'profile/secondStepToState',
       setThirdStepToState: 'profile/setThirdStepToState',
       setFourStepToState: 'profile/setFourStepToState',
       setFiveStepToState: 'profile/setFiveStepToState',
@@ -193,6 +217,10 @@ export default {
     },
     saveTariff(tariff) {
       this.setFirstStepToState(tariff);
+      this.onChangeHandler = false;
+    },
+    saveAgregators(agr) {
+      this.secondStepToState(Object.values(agr));
       this.onChangeHandler = false;
     },
     saveLicense(data) {
