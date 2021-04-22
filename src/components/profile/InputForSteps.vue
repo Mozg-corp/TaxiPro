@@ -38,7 +38,7 @@
     >
     <span class="inputForSteps__errorText"
           v-if="item.errorMessage">
-            {{ item.errorMessage }}
+            {{ item.errorMessage.errorText }}
           </span>
   </div>
 </template>
@@ -47,6 +47,7 @@
 import { isValid } from '@/store/regularExp';
 import date from '@/directives/date';
 import passportNumbers from '@/directives/passportNumbers';
+import errorsText from '@/store/errorsText';
 
 export default {
   name: 'InputForSteps',
@@ -54,7 +55,6 @@ export default {
   props: {
     item: Object,
     modelValue: String,
-    style: String,
     directive: String,
   },
   directives: {
@@ -64,6 +64,8 @@ export default {
   computed: {
     isValid() {
       if (this.item.value === '') {
+        // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
+        this.item.errorMessage = '';
         return '';
       }
       if (isValid(this.item.value,
@@ -73,8 +75,12 @@ export default {
       ) {
         // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
         this.item.isCorrect = true;
+        // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
+        this.item.errorMessage = '';
         return 'inputForSteps__correct';
       }
+      // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
+      this.item.errorMessage = errorsText;
       // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
       this.item.isCorrect = false;
       return 'inputForSteps__error';

@@ -57,7 +57,6 @@ export default {
           text: 'Сериия и номер В.У.',
           value: '',
           errorMessage: '',
-          style: '',
           validate: {
             regName: regNumbersAndSpace,
             min: 10,
@@ -72,7 +71,6 @@ export default {
           text: 'Дата выдачи',
           value: '',
           errorMessage: '',
-          style: '',
           validate: {
             regName: regDate,
             min: 9,
@@ -87,7 +85,6 @@ export default {
           text: 'Срок выдачи',
           value: '',
           errorMessage: '',
-          style: '',
           validate: {
             regName: regDate,
             min: 9,
