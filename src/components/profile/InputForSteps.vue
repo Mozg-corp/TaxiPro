@@ -1,0 +1,88 @@
+<template>
+  <div class="inputForSteps">
+    <label
+      class="inputForSteps__label"
+      :for="item.id">{{ item.text }}
+    </label>
+    <input
+      v-if="directive === 'v-passport-numbers'"
+      class="inputForSteps__input"
+           :class="isValid"
+           type="text"
+           :id="item.id"
+           :placeholder="item.placeholder"
+           :value="item.value"
+           @input="$emit('update:modelValue', $event.target.value)"
+      v-passport-numbers
+    >
+    <input
+      v-else-if="directive === 'v-date'"
+      class="inputForSteps__input"
+           :class="isValid"
+           type="text"
+           :id="item.id"
+           :placeholder="item.placeholder"
+           :value="item.value"
+           @input="$emit('update:modelValue', $event.target.value)"
+      v-date
+    >
+    <input
+      v-else
+      class="inputForSteps__input"
+           :class="isValid"
+           type="text"
+           :id="item.id"
+           :placeholder="item.placeholder"
+           :value="item.value"
+           @input="$emit('update:modelValue', $event.target.value)"
+    >
+    <span class="inputForSteps__errorText"
+          v-if="item.errorMessage">
+            {{ item.errorMessage }}
+          </span>
+  </div>
+</template>
+
+<script>
+import { isValid } from '@/store/regularExp';
+import date from '@/directives/date';
+import passportNumbers from '@/directives/passportNumbers';
+
+export default {
+  name: 'InputForSteps',
+  emits: ['update:modelValue'],
+  props: {
+    item: Object,
+    modelValue: String,
+    style: String,
+    directive: String,
+  },
+  directives: {
+    date,
+    passportNumbers,
+  },
+  computed: {
+    isValid() {
+      if (this.item.value === '') {
+        return '';
+      }
+      if (isValid(this.item.value,
+        this.item.validate.min,
+        this.item.validate.max,
+        this.item.validate.regName)
+      ) {
+        // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
+        this.item.isCorrect = true;
+        return 'inputForSteps__correct';
+      }
+      // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
+      this.item.isCorrect = false;
+      return 'inputForSteps__error';
+    },
+  },
+};
+</script>
+
+<style scoped>
+
+</style>
