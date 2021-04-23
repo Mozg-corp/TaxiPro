@@ -22,7 +22,7 @@ import Welcome from '@/components/profile/Welcome';
 // eslint-disable-next-line import/extensions
 import Step6 from '@/components/profile/Step6';
 // eslint-disable-next-line import/extensions
-import Index from '@/components/account/Index';
+import Index from '@/components/account/index/Index';
 
 const routes = [
   {
