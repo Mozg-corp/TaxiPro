@@ -12,14 +12,14 @@
       :isChanged="false"
       :typeText="'Phone'"
       ></LastStepCard>
-        <LastStepCard
-          v-for="item in Data"
-          :key="item"
-          :header="item.text"
-          :typeText="item.type"
-          :info="item.value"
-          :isChanged="true"
-        ></LastStepCard>
+      <LastStepCard
+        v-for="item in Data"
+        :key="item"
+        :header="item.text"
+        :typeText="item.type"
+        :info="item.value"
+        :isChanged="true"
+      ></LastStepCard>
     </div>
     <a class="button routerLink">
       <button @click="sendData" class="button routerLink">

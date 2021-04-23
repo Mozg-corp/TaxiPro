@@ -1,5 +1,11 @@
 <template>
-  <div class="inputForSteps">
+  <h5
+    class="insertData__text"
+    v-if="item.heading"
+  >
+    {{item.heading}}
+  </h5>
+  <div class="inputForSteps" :class="item.class">
     <label
       class="inputForSteps__label"
       :for="item.id">{{ item.text }}
@@ -89,6 +95,15 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.inputHouse {
+  width: 49%;
+  display: inline-block;
+  margin-right: 1%;
+}
+.inputFlat {
+  width: 49%;
+  display: inline-block;
+  margin-left: 1%;
+}
 </style>

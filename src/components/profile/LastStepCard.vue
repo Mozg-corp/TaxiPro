@@ -195,12 +195,15 @@ export default {
   },
   methods: {
     eventInput(data, d) {
-      const index = d.indexOf(data.id.toString());
+      console.log(d, data);
+      const index = d.indexOf(data.id);
+      console.log(index);
       if (data.isChecked) {
-        this.Data.push(data.id.toString());
-      } else if (index !== -1) {
-        // eslint-disable-next-line no-param-reassign
-        delete d[index];
+        console.log('true');
+        this.Data.push(data.id);
+      } else {
+        console.log('false');
+        this.Data.splice(index, 1);
       }
       return this.Data;
     },

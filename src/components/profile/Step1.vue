@@ -30,128 +30,13 @@
       </ul>
     </div>
     <div class="tariffs">
-      <input
-        class="inputNone"
-        type="radio"
-        name="direction"
-        id="start"
+      <Radio
+        v-for="item in allTariffs"
+        :key="item.title"
+        :item="item"
+        :value="item.title"
         v-model="tariffName"
-        value="Старт"
-        checked
-      >
-      <label for="start">
-      <div class="tariff">
-        <div class="tariff__block">
-          <div class="cardTariff">
-            <div class="cardTariff__ok"></div>
-            <div class="cardTariff__inside">
-              <div class="cardTariff__top">
-                <h4 class="cardTariff__header">Старт</h4>
-                <p class="cardTariff__text">0 ₽ в месяц <br>3% от суммы вывода</p>
-              </div>
-              <div class="cardTariff__list">
-                <ul class="cardTariff__ul">
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">
-                      Обслуживание бесплатно, если тратить все деньги на АЗС
-                    </li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Подходит для новых пользователей ТаксиПро</li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Моментальные выплаты</li>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
-      <input
-        class="inputNone"
-        type="radio"
-        name="direction"
-        id="comfort"
-        v-model="tariffName"
-        value="Комфорт">
-      <label for="comfort">
-      <div class="tariff">
-        <div class="tariff__block">
-          <div class="cardTariff">
-            <div class="cardTariff__ok"></div>
-            <div class="cardTariff__inside">
-              <div class="cardTariff__top">
-                <h4 class="cardTariff__header">Комфорт</h4>
-                <p class="cardTariff__text">690 ₽ в месяц <br>+1% от суммы вывода</p>
-              </div>
-              <div class="cardTariff__list">
-                <ul class="cardTariff__ul">
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">
-                      Низкая абонентская плата
-                    </li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Удобные автоматические еженедельные платежи</li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Скидка на комиссию банка</li>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
-      <input
-        class="inputNone"
-        type="radio"
-        name="direction"
-        id="premium"
-        v-model="tariffName"
-        value="Премиум">
-      <label for="premium">
-      <div class="tariff">
-        <div class="tariff__block">
-          <div class="cardTariff">
-            <div class="cardTariff__ok"></div>
-            <div class="cardTariff__inside">
-              <div class="cardTariff__top">
-                <h4 class="cardTariff__header">Премиум</h4>
-                <p class="cardTariff__text">990 ₽ в месяц <br>+1% от суммы вывода</p>
-              </div>
-              <div class="cardTariff__list">
-                <ul class="cardTariff__ul">
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">
-                      Безлимитные моментальные платежи в любое время
-                    </li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">Оптимальный тариф для активных водителей</li>
-                  </div>
-                  <div class="grid pb10">
-                    <div class="cardTariff__circle"></div>
-                    <li class="cardTariff__li">С наличных заказов не берем комиссию</li>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
+      ></Radio>
     </div>
     <div class="btn_step">
       <router-link
@@ -166,14 +51,24 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+// eslint-disable-next-line import/extensions
+import Radio from '@/components/profile/inputs/Radio';
 
 export default {
   name: 'Step1',
+  components: {
+    Radio,
+  },
   data() {
     return {
       tariffName: 'Старт',
     };
+  },
+  computed: {
+    ...mapGetters({
+      allTariffs: 'profile/getAllTariffs',
+    }),
   },
   methods: {
     ...mapActions({

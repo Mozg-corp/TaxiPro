@@ -30,6 +30,13 @@
       >Далее
       </button>
     </router-link>
+    <div
+      v-if="isAllInputsCorrect"
+      class="checkData"
+    >
+      Перед отправкой проверьте
+      все данные
+    </div>
   </div>
 </div>
 </template>
@@ -41,7 +48,7 @@ import {
 } from '@/store/regularExp';
 import { mapActions } from 'vuex';
 // eslint-disable-next-line import/extensions
-import InputForSteps from '@/components/profile/InputForSteps';
+import InputForSteps from '@/components/profile/inputs/InputForSteps';
 
 export default {
   name: 'Step4',

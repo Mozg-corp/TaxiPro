@@ -2,33 +2,35 @@ const setFirstStepToState = (state, tariff) => {
   state.registrationData.tariffName.value = tariff;
 };
 const setSecondStepToState = (state, agregators) => {
+  const agr = [...agregators];
+  console.log(agr);
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < agregators.length; i++) {
+  for (let i = 0; i < agr.length; i++) {
     if (i === 0) {
-      state.allAgregators.gett.isChecked = agregators[i] === '0';
-      state.allAgregators.yandexTaxi.isChecked = agregators[i] === '1';
-      state.allAgregators.citymobile.isChecked = agregators[i] === '2';
-      state.allAgregators.uber.isChecked = agregators[i] === '3';
-      state.allAgregators.didi.isChecked = agregators[i] === '4';
+      state.allAgregators.gett.isChecked = agr[i] === 0;
+      state.allAgregators.yandexTaxi.isChecked = agr[i] === 1;
+      state.allAgregators.citymobile.isChecked = agr[i] === 2;
+      state.allAgregators.uber.isChecked = agr[i] === 3;
+      state.allAgregators.didi.isChecked = agr[i] === 4;
     } else {
-      if (agregators[i] === '0') {
+      if (agr[i] === 0) {
         state.allAgregators.gett.isChecked = true;
       }
-      if (agregators[i] === '1') {
+      if (agr[i] === 1) {
         state.allAgregators.yandexTaxi.isChecked = true;
       }
-      if (agregators[i] === '2') {
+      if (agr[i] === 2) {
         state.allAgregators.citymobile.isChecked = true;
       }
-      if (agregators[i] === '3') {
+      if (agr[i] === 3) {
         state.allAgregators.uber.isChecked = true;
       }
-      if (agregators[i] === '4') {
+      if (agr[i] === 4) {
         state.allAgregators.didi.isChecked = true;
       }
     }
   }
-  state.registrationData.agregators.value = agregators;
+  state.registrationData.agregators.value = agr;
 };
 const setThirdStepToState = (state, passport) => {
   state.registrationData.passport.value = passport;

@@ -8,80 +8,14 @@
     <div class="choiceTaxi">
       <h2 class="choiceTaxi__header">Выберите агрегаторы такси через которые вы будите работать</h2>
       <div class="choiceTaxi__nameAgregators">
-        <input
-          class="inputNone"
-          type="checkbox"
-          id="gett"
+        <Checkbox
+          v-for="item in allAgregators"
+          :key="item.id"
+          :id="item.htmlId"
+          :value="item.id"
+          :img="item.img"
           v-model="agregators"
-          value="0">
-        <label for="gett">
-          <div class="choiceTaxi__block">
-            <div class="agregator">
-              <div class="agregator__circle"></div>
-              <img class="agregator__img" src="/assets/images/step2/0.jpeg" alt="gett">
-            </div>
-          </div>
-        </label>
-        <input
-          class="inputNone"
-          type="checkbox"
-          id="uber"
-          v-model="agregators"
-          value="3">
-        <label for="uber">
-        <div class="choiceTaxi__block">
-          <div class="agregator">
-            <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/3.jpeg" alt="uber">
-          </div>
-        </div>
-        </label>
-        <input
-          class="inputNone"
-          type="checkbox"
-          id="yandexTaxi"
-          v-model="agregators"
-          value="1">
-        <label for="yandexTaxi">
-        <div class="choiceTaxi__block">
-          <div class="agregator">
-            <div class="agregator__circle"></div>
-            <img
-              class="agregator__img"
-              src="/assets/images/step2/1.jpeg"
-              alt="Яндекс Такси"
-            >
-          </div>
-        </div>
-        </label>
-        <input
-          class="inputNone"
-          type="checkbox"
-          id="citymobile"
-          v-model="agregators"
-          value="2">
-        <label for="citymobile">
-        <div class="choiceTaxi__block">
-          <div class="agregator">
-            <div class="agregator__circle"></div>
-            <img class="agregator__img" src="/assets/images/step2/2.jpeg" alt="ситимобил">
-          </div>
-        </div>
-        </label>
-        <input
-          class="inputNone"
-          type="checkbox"
-          id="didi"
-          v-model="agregators"
-          value="4">
-        <label for="didi">
-          <div class="choiceTaxi__block">
-            <div class="agregator">
-              <div class="agregator__circle"></div>
-              <img class="agregator__img" src="/assets/images/step2/4.jpeg" alt="didi">
-            </div>
-          </div>
-        </label>
+        ></Checkbox>
       </div>
     </div>
     <div>
@@ -98,7 +32,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+// eslint-disable-next-line import/extensions
+import Checkbox from '@/components/profile/inputs/Checkbox';
 
 export default {
   name: 'Step2',
@@ -107,7 +43,13 @@ export default {
       agregators: [],
     };
   },
+  components: {
+    Checkbox,
+  },
   computed: {
+    ...mapGetters({
+      allAgregators: 'profile/getAllAgregators',
+    }),
     isEmpty() {
       return this.agregators.length === 0;
     },

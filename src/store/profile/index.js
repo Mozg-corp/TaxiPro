@@ -9,14 +9,29 @@ export default {
       {
         title: 'Старт',
         htmlId: 'start',
+        description: '0 ₽ в месяц \n 3% от суммы вывода',
+        firstList: 'Обслуживание бесплатно, если тратить все деньги на АЗС',
+        secondList: 'Подходит для новых пользователей ТаксиПро',
+        thirdList: 'Моментальные выплаты',
+        isChecked: true,
       },
       {
         title: 'Комфорт',
         htmlId: 'comfort',
+        description: '690 ₽ в месяц \n +1% от суммы вывода',
+        firstList: 'Низкая абонентская плата',
+        secondList: 'Удобные автоматические еженедельные платежи',
+        thirdList: 'Скидка на комиссию банка',
+        isChecked: false,
       },
       {
         title: 'Премиум',
         htmlId: 'premium',
+        description: '990 ₽ в месяц \n +1% от суммы вывода',
+        firstList: 'Безлимитные моментальные платежи в любое время',
+        secondList: 'Оптимальный тариф для активных водителей',
+        thirdList: 'С наличных заказов не берем комиссию',
+        isChecked: false,
       },
     ],
     allAgregators: {
@@ -79,7 +94,7 @@ export default {
       },
       car: {
         type: 'car',
-        text: 'Данные С.Т.',
+        text: 'Данные Т.C.',
         value: [],
       },
       license: {

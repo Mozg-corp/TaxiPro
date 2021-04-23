@@ -60,9 +60,8 @@ import {
   regHouseNumber,
 } from '@/store/regularExp';
 // eslint-disable-next-line import/extensions
-import InputForSteps from '@/components/profile/InputForSteps';
+import InputForSteps from '@/components/profile/inputs/InputForSteps';
 
-// eslint-disable-next-line no-unused-vars
 export default {
   name: 'Step3',
   data() {
@@ -167,6 +166,7 @@ export default {
           directive: 'v-date',
         },
         {
+          heading: 'Адрес регистрации',
           id: 'city',
           placeholder: 'Тольятти',
           text: 'Город',
@@ -221,6 +221,7 @@ export default {
           },
           isCorrect: false,
           directive: '',
+          class: 'inputHouse',
         },
         {
           id: 'flat',
@@ -235,6 +236,7 @@ export default {
           },
           isCorrect: true,
           directive: '',
+          class: 'inputFlat',
         },
       ],
     };
