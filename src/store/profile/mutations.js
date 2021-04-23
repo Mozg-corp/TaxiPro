@@ -3,7 +3,6 @@ const setFirstStepToState = (state, tariff) => {
 };
 const setSecondStepToState = (state, agregators) => {
   const agr = [...agregators];
-  console.log(agr);
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < agr.length; i++) {
     if (i === 0) {

@@ -187,22 +187,18 @@ export default {
       Data: this.info,
     };
   },
-  props: {
-    header: String,
-    info: String,
-    typeText: String,
-    isChanged: Boolean,
-  },
+  props: [
+    'info',
+    'header',
+    'typeText',
+    'isChanged',
+  ],
   methods: {
     eventInput(data, d) {
-      console.log(d, data);
       const index = d.indexOf(data.id);
-      console.log(index);
       if (data.isChecked) {
-        console.log('true');
         this.Data.push(data.id);
       } else {
-        console.log('false');
         this.Data.splice(index, 1);
       }
       return this.Data;
