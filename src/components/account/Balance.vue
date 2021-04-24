@@ -9,7 +9,7 @@
 import router from '@/router';
 import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
-import {getFromStorage} from "@/store/libs";
+import { getFromStorage } from '@/store/libs';
 
 export default {
   name: 'Balance',
@@ -23,7 +23,7 @@ export default {
   methods: {
     getBalance() {
       const usersId = getFromStorage('users_id');
-      axios.post(`/api/v1/balance/${usersId}`, null, {
+      axios.get(`/api/v1/balance/${usersId}`, null, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
         // eslint-disable-next-line no-shadow

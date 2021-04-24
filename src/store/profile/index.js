@@ -1,3 +1,6 @@
+import {
+  regNumbersOnly,
+} from '@/store/regularExp';
 import actions from './actions';
 import getters from './getters';
 import mutations from './mutations';
@@ -98,8 +101,19 @@ export default {
         value: [],
       },
       license: {
+        heading: 'Данные лицензии',
+        id: 'license',
+        placeholder: '0765643',
         type: 'license',
-        text: 'Данные лицензии',
+        text: 'Номер лицензии',
+        errorMessage: '',
+        validate: {
+          regName: regNumbersOnly,
+          min: 5,
+          max: 20,
+        },
+        isCorrect: false,
+        directive: '',
         value: '',
       },
     },

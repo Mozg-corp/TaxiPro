@@ -17,7 +17,7 @@
         :key="item"
         :header="item.text"
         :typeText="item.type"
-        :info="item.value"
+        :info="item"
         :isChanged="true"
       ></LastStepCard>
     </div>
@@ -102,7 +102,7 @@ export default {
             + this.Data.passport.value[8].value + this.Data.passport.value[9].value
               + this.Data.passport.value[10].value + this.Data.passport.value[11].value,
             license_series: this.Data.driverLessons.value[0].value.substring(0, 4),
-            license_number: this.Data.driverLessons.value[0].value.substring(5),
+            license_number: this.Data.license.value,
             license_date,
             license_expire,
             user_id: users_id,

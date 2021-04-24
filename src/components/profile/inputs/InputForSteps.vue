@@ -13,7 +13,7 @@
     <input
       v-if="directive === 'v-passport-numbers'"
       class="inputForSteps__input"
-           :class="isValid"
+           :class="isValidate"
            type="text"
            :id="item.id"
            :placeholder="item.placeholder"
@@ -24,7 +24,7 @@
     <input
       v-else-if="directive === 'v-date'"
       class="inputForSteps__input"
-           :class="isValid"
+           :class="isValidate"
            type="text"
            :id="item.id"
            :placeholder="item.placeholder"
@@ -35,7 +35,7 @@
     <input
       v-else
       class="inputForSteps__input"
-           :class="isValid"
+           :class="isValidate"
            type="text"
            :id="item.id"
            :placeholder="item.placeholder"
@@ -62,13 +62,14 @@ export default {
     item: Object,
     modelValue: String,
     directive: String,
+    index: Number,
   },
   directives: {
     date,
     passportNumbers,
   },
   computed: {
-    isValid() {
+    isValidate() {
       if (this.item.value === '') {
         // eslint-disable-next-line vue/no-mutating-props,vue/no-side-effects-in-computed-properties
         this.item.errorMessage = '';
