@@ -23,6 +23,8 @@ import Welcome from '@/components/profile/Welcome';
 import Step6 from '@/components/profile/Step6';
 // eslint-disable-next-line import/extensions
 import Index from '@/components/account/index/Index';
+// eslint-disable-next-line import/extensions
+import ChangeBalance from '@/components/account/ChangeBalance';
 
 const routes = [
   {
@@ -44,6 +46,11 @@ const routes = [
         path: '/account/withdrawal',
         name: 'Withdrawal',
         component: Withdrawal,
+      },
+      {
+        path: '/account/balance/change',
+        name: 'ChangeBalance',
+        component: ChangeBalance,
       },
     ],
   },

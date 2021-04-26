@@ -1,29 +1,70 @@
 <template>
-  <el-collapse v-model="activeNames" @change="handleChange">
+  <el-collapse v-model="activeNames">
     <el-collapse-item name="1">
       <template #title>
-        <img class="el-image" src="/assets/images/account/tarif.png" alt="">
+        <img class="el-image collapseImg" src="/assets/images/account/tarif.png" alt="">
         <h6 class="el-fontSize">МОЙ ТАРИФ</h6>
       </template>
-      <div>more...</div>
+      <Tariff
+        :isButton="true"
+        :item="myTariff"
+      />
     </el-collapse-item>
     <el-collapse-item title="Feedback" name="2">
       <template #title>
-        <img class="el-image" src="/assets/images/account/taxi.png" alt="">
+        <img class="el-image collapseImg" src="/assets/images/account/taxi.png" alt="">
         <h6 class="el-fontSize">МОЙ АВТОМОБИЛЬ</h6>
       </template>
-      <div>more...</div>
+      <LastStepCard
+        :header="Car.text"
+        :typeText="Car.type"
+        :info="Car"
+        :isChanged="true"
+      ></LastStepCard>
+      <LastStepCard
+        :header="license.text"
+        :typeText="license.type"
+        :info="license"
+        :isChanged="true"
+      ></LastStepCard>
     </el-collapse-item>
   </el-collapse>
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
+import LastStepCard from '@/components/profile/LastStepCard';
+import { mapGetters } from 'vuex';
+// eslint-disable-next-line import/extensions
+import Tariff from '@/components/account/index/components/Tariff';
+
 export default {
   name: 'CollapseMenu',
+  components: {
+    LastStepCard,
+    Tariff,
+  },
   data() {
     return {
       activeNames: [],
     };
+  },
+  computed: {
+    ...mapGetters({
+      Car: 'profile/getCar',
+      license: 'profile/getLicense',
+      allTariff: 'profile/getAllTariffs',
+      currentTariff: 'profile/getTariffNameToAPI',
+    }),
+    myTariff() {
+      if (this.currentTariff === 'Старт') {
+        return this.allTariff[0];
+      }
+      if (this.currentTariff === 'Комфорт') {
+        return this.allTariff[1];
+      }
+      return this.allTariff[2];
+    },
   },
   methods: {},
 };
@@ -46,7 +87,7 @@ export default {
   padding: 4px 10px;
   height: auto;
 }
-.el-image {
+.collapseImg {
   height: 75px;
 }
 .el-collapse-item__arrow {
@@ -60,6 +101,14 @@ export default {
 }
 .el-collapse-item__wrap {
   border-radius: 0 0 10px 10px;
+}
+
+.el-collapse-item:last-child {
+  margin-bottom: 5px;
+}
+
+.el-collapse-item__content {
+  padding-bottom: 0;
 }
 
 </style>

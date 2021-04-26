@@ -18,6 +18,11 @@
           v-model="item.value"
           :directive="item.directive"
         ></InputForSteps>
+        <InputForSteps
+          :item="licence"
+          v-model="licence.value"
+          :directive="licence.directive"
+        ></InputForSteps>
       </div>
     </div>
   </div>
@@ -44,138 +49,12 @@
 <script>
 // eslint-disable-next-line import/extensions
 import InputForSteps from '@/components/profile/inputs/InputForSteps';
-import {
-  regName,
-  regNumbersOnly,
-  regLettersNumbersOnly,
-  regTextNumberMore,
-  regNumbersMore,
-} from '@/store/regularExp';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Step5',
   components: {
     InputForSteps,
-  },
-  data() {
-    return {
-      data: [
-        {
-          id: 'brand',
-          placeholder: 'KIA',
-          text: 'Марка автомобиля',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName,
-            min: 1,
-            max: 128,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'model',
-          placeholder: 'RIO',
-          text: 'Модель автомобиля',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName,
-            min: 1,
-            max: 128,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'year',
-          placeholder: '2019',
-          text: 'Год автомобиля',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersOnly,
-            min: 3,
-            max: 5,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'color',
-          placeholder: 'черный',
-          text: 'Цвет автомобиля',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regTextNumberMore,
-            min: 1,
-            max: 99,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'carNumber',
-          placeholder: 'е756уе150',
-          text: 'Регистрационный знак ТС',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regTextNumberMore,
-            min: 6,
-            max: 10,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'VIN',
-          placeholder: 'vyfu65566fufi76uff6u',
-          text: 'VIN',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regLettersNumbersOnly,
-            min: 7,
-            max: 99,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'numberСertificate',
-          placeholder: '54 67 № 890909',
-          text: 'Номер свидетельства ТС',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersMore,
-            min: 7,
-            max: 99,
-          },
-          isCorrect: false,
-          directive: 'v-passport-numbers',
-        },
-        {
-          heading: 'Данные лицензии',
-          id: 'license',
-          placeholder: '0765643',
-          text: 'Номер лицензии',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersOnly,
-            min: 5,
-            max: 20,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-      ],
-    };
   },
   methods: {
     ...mapActions({
@@ -184,10 +63,14 @@ export default {
     }),
     setFiveStep() {
       this.setFiveStepToState(this.data);
-      this.setLicenseToState(this.data[7].value);
+      this.setLicenseToState(this.licence.value);
     },
   },
   computed: {
+    ...mapGetters({
+      data: 'profile/getCarValue',
+      licence: 'profile/getLicense',
+    }),
     isAllInputsCorrect() {
       return !!(this.data[0].isCorrect
         && this.data[1].isCorrect
@@ -196,7 +79,7 @@ export default {
         && this.data[4].isCorrect
         && this.data[5].isCorrect
         && this.data[6].isCorrect
-        && this.data[7].isCorrect
+        && this.licence.isCorrect
       );
     },
   },

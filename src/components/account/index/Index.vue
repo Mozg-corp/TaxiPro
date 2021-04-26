@@ -1,6 +1,7 @@
 <template>
 <div class="indexAccount">
   <PersonalData />
+  <Agregators />
   <CollapseMenu />
 </div>
 </template>
@@ -10,6 +11,8 @@
 import PersonalData from '@/components/account/index/components/PersonalData';
 // eslint-disable-next-line import/extensions
 import CollapseMenu from '@/components/account/index/components/CollapseMenu';
+// eslint-disable-next-line import/extensions
+import Agregators from '@/components/account/index/components/Agregators';
 
 export default {
   name: 'Index',
@@ -20,6 +23,7 @@ export default {
   components: {
     PersonalData,
     CollapseMenu,
+    Agregators,
   },
 };
 </script>

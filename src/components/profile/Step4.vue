@@ -11,7 +11,7 @@
     <div class="insertData__stepThree">
       <div class="inputStepThree">
         <InputForSteps
-          v-for="(item, index) in data"
+          v-for="(item, index) in driverLessons"
           :key="item.id"
           :index="index"
           :item="item"
@@ -42,80 +42,32 @@
 </template>
 
 <script>
-import {
-  regDate,
-  regNumbersAndSpace,
-} from '@/store/regularExp';
-import { mapActions } from 'vuex';
+
 // eslint-disable-next-line import/extensions
 import InputForSteps from '@/components/profile/inputs/InputForSteps';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Step4',
   components: {
     InputForSteps,
   },
-  data() {
-    return {
-      data: [
-        {
-          id: 'driverNumbers',
-          placeholder: '2233 444555',
-          text: 'Сериия и номер В.У.',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersAndSpace,
-            min: 10,
-            max: 15,
-          },
-          isCorrect: false,
-          directive: 'v-passport-numbers',
-        },
-        {
-          id: 'whenDriverLessonsGive',
-          placeholder: '01/01/2020',
-          text: 'Дата выдачи',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regDate,
-            min: 9,
-            max: 11,
-          },
-          isCorrect: false,
-          directive: 'v-date',
-        },
-        {
-          id: 'whenDriverLessonsClose',
-          placeholder: '01/01/2000',
-          text: 'Срок выдачи',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regDate,
-            min: 9,
-            max: 11,
-          },
-          isCorrect: false,
-          directive: 'v-date',
-        },
-      ],
-    };
-  },
   methods: {
     ...mapActions({
       setFourStepToState: 'profile/setFourStepToState',
     }),
     setFourStep() {
-      this.setFourStepToState(this.data);
+      this.setFourStepToState(this.driverLessons);
     },
   },
   computed: {
+    ...mapGetters({
+      driverLessons: 'profile/getDriverLessonsValue',
+    }),
     isAllInputsCorrect() {
-      return !!(this.data[0].isCorrect
-        && this.data[1].isCorrect
-        && this.data[2].isCorrect);
+      return !!(this.driverLessons[0].isCorrect
+        && this.driverLessons[1].isCorrect
+        && this.driverLessons[2].isCorrect);
     },
   },
 };

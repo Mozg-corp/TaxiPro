@@ -102,8 +102,11 @@ export default {
   display: flex;
   overflow: scroll;
 }
-.tariff{
+.tariff,
+.myTariff {
   min-width: 350px;
+}
+.tariff {
   margin: 6px;
 }
 .inputNone{

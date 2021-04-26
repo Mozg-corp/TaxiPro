@@ -45,202 +45,15 @@
 </template>
 <!--suppress JSAnnotator, JSUnusedGlobalSymbols -->
 <script>
-import { mapActions } from 'vuex';
-import date from '@/directives/date';
-import passportNumbers from '@/directives/passportNumbers';
-import {
-  regSurname,
-  regName,
-  regDate,
-  regNumbersAndSpace,
-  regTextNumberMore,
-  regPatronymic,
-  regStreet,
-  regNumbersOnly,
-  regHouseNumber,
-} from '@/store/regularExp';
+
 // eslint-disable-next-line import/extensions
 import InputForSteps from '@/components/profile/inputs/InputForSteps';
+import { mapActions, mapGetters } from 'vuex';
+import date from '@/directives/date';
+import passportNumbers from '@/directives/passportNumbers';
 
 export default {
   name: 'Step3',
-  data() {
-    return {
-      data: [
-        {
-          id: 'surname',
-          placeholder: 'Иванов',
-          text: 'Фамилия',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regSurname,
-            min: 1,
-            max: 32,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'name',
-          placeholder: 'Петр',
-          text: 'Имя',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName,
-            min: 1,
-            max: 32,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'patronymic',
-          placeholder: 'Петрович',
-          text: 'Отчество (если есть)',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regPatronymic,
-            min: 0,
-            max: 32,
-          },
-          isCorrect: true,
-          directive: '',
-        },
-        {
-          id: 'birthday',
-          placeholder: '27/08/1980',
-          text: 'Дата рождения',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regDate,
-            min: 9,
-            max: 11,
-          },
-          isCorrect: false,
-          directive: 'v-date',
-        },
-        {
-          id: 'passportNumber',
-          placeholder: '8807 198022',
-          text: 'Серия и номер паспорта',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersAndSpace,
-            min: 10,
-            max: 15,
-          },
-          isCorrect: false,
-          directive: 'v-passport-numbers',
-        },
-        {
-          id: 'passportWhoGive',
-          placeholder: 'ТП №1 в гор. округе Тольятти...',
-          text: 'Кем выдан',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regTextNumberMore,
-            min: 10,
-            max: 64,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'passportWhenGive',
-          placeholder: '27/08/2019',
-          text: 'Дата выдачи',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regDate,
-            min: 9,
-            max: 11,
-          },
-          isCorrect: false,
-          directive: 'v-date',
-        },
-        {
-          heading: 'Адрес регистрации',
-          id: 'city',
-          placeholder: 'Тольятти',
-          text: 'Город',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName,
-            min: 1,
-            max: 32,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'region',
-          placeholder: 'Московская',
-          text: 'Регион/Область (если есть)',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regPatronymic,
-            min: 0,
-            max: 32,
-          },
-          isCorrect: true,
-          directive: '',
-        },
-        {
-          id: 'street',
-          placeholder: 'Индустриальная',
-          text: 'Улица',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regStreet,
-            min: 1,
-            max: 64,
-          },
-          isCorrect: false,
-          directive: '',
-        },
-        {
-          id: 'house',
-          placeholder: '50',
-          text: 'Дом',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regHouseNumber,
-            min: 0,
-            max: 10,
-          },
-          isCorrect: false,
-          directive: '',
-          class: 'inputHouse',
-        },
-        {
-          id: 'flat',
-          placeholder: '44',
-          text: 'Квартира',
-          value: '',
-          errorMessage: '',
-          validate: {
-            regName: regNumbersOnly,
-            min: 0,
-            max: 10,
-          },
-          isCorrect: true,
-          directive: '',
-          class: 'inputFlat',
-        },
-      ],
-    };
-  },
   components: {
     InputForSteps,
   },
@@ -257,6 +70,9 @@ export default {
     passportNumbers,
   },
   computed: {
+    ...mapGetters({
+      data: 'profile/getPassportValue',
+    }),
     isAllInputsCorrect() {
       return !!(this.data[0].isCorrect
         && this.data[1].isCorrect
