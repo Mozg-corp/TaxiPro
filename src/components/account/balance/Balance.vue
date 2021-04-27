@@ -10,6 +10,24 @@
         <img src="/assets/images/account/balance.png" alt="" class="totalBalance__img">
       </div>
     </div>
+    <div class="miniBalance">
+      <AgregatorBalance
+        v-for="item in Data"
+        :key="item.img"
+        :img="item.img"
+        :balance="item.balance"
+      />
+    </div>
+    <router-link
+      :to="{ name: 'Withdrawal' }"
+      class="button routerLink"
+    >
+      <button
+        :disabled="!isAllInputsCorrect"
+        class="button routerLink"
+      >Вывести деньги
+      </button>
+    </router-link>
   </div>
 </template>
 
@@ -19,17 +37,36 @@ import router from '@/router';
 import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
 import { getFromStorage } from '@/store/libs';
+// eslint-disable-next-line import/extensions
+import AgregatorBalance from '@/components/account/balance/components/AgregatorBalance';
 
 export default {
   name: 'Balance',
   data: () => ({
+    // Hardcode Data
+    Data: [
+      {
+        img: '/assets/images/step2/0.jpeg',
+        balance: 500,
+      },
+      {
+        img: '/assets/images/step2/3.jpeg',
+        balance: 1000,
+      },
+    ],
     balance: 0,
     waitingSumma: 0,
   }),
+  components: {
+    AgregatorBalance,
+  },
   // mounted() {
   //   this.balance = this.getBalance();
   // },
   methods: {
+    getBalanceEachAgregator() {
+      //
+    },
     getBalance() {
       const usersId = getFromStorage('users_id');
       axios.get(`/api/v1/balance/${usersId}`, null, {
@@ -53,6 +90,9 @@ export default {
     ...mapGetters({
       //
     }),
+    isAllInputsCorrect() {
+      return this.balance !== 0;
+    },
   },
 };
 </script>
@@ -61,6 +101,9 @@ export default {
 
 .balance {
   margin-top: 20px;
+}
+.miniBalance {
+  margin: 30px 0;
 }
 .totalBalance {
   margin-top: 20px;
