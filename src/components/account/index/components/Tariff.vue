@@ -30,6 +30,7 @@
           </div>
         </div>
         <router-link
+          v-if="isButton"
           :to="{ name: 'ChangeBalance' }"
           class="myTariffBtn"
         >

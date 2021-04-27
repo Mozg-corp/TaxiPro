@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Account from '@/views/Account.vue';
-import Balance from '@/components/account/Balance.vue';
+import Balance from '@/components/account/balance/Balance.vue';
 import Landing from '@/views/Landing.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
