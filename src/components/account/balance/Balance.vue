@@ -61,7 +61,7 @@ export default {
     AgregatorBalance,
   },
   // mounted() {
-  //   this.balance = this.getBalance();
+  //   this.Data = this.getBalance();
   // },
   methods: {
     getBalanceEachAgregator() {
