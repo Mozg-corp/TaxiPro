@@ -1,7 +1,7 @@
 <template>
   <div class="container withdrawal">
     <BackButton />
-    <div class="chooseAgr">
+    <div class="chooseAgr" v-loading="loading3">
       <h3 class="chooseAgr__header">Выберите агрегатор</h3>
       <div class="chooseAgr__balance">
         <MoneyAgregator
@@ -26,7 +26,7 @@
               </h4>
             </template>
             <template v-else #title>
-              <h4 class="el-fontSize">
+              <h4 class="el-header">
                 выбрать карту
               </h4>
             </template>
@@ -54,6 +54,32 @@
                 </label>
               </div>
             </div>
+            <div class="addNewCard">
+              <h4 class="el-header">
+                Добавить карту / кошелёк
+              </h4>
+              <div class="addNewCard__forInputs">
+                <input
+                  type="text"
+                  class="addNewCard__input"
+                  placeholder="номер"
+                  v-model="cardNumber"
+                >
+                <input
+                  placeholder="название"
+                  type="text"
+                  class="addNewCard__input"
+                  v-model="cardName"
+                >
+              </div>
+              <button
+                v-loading="loading"
+                @click="addCard"
+                :disabled="!isCorrectCard"
+                class="button routerLink"
+              >Сохранить карту
+              </button>
+            </div>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -68,17 +94,17 @@
         </div>
       </div>
     </div>
-    <router-link
-        :to="{ name: 'Balance' }"
-        class="button routerLink"
-      >
+<!--    <router-link-->
+<!--        :to="{ name: 'Balance' }"-->
+<!--        class="button routerLink"-->
+<!--      >-->
         <button
           @click="giveMeMoney"
           :disabled="!isCorrect"
           class="button routerLink"
         >Вывести {{totalPrice}} ₽
         </button>
-      </router-link>
+<!--      </router-link>-->
 
     <el-dialog
       v-model="dialogVisible"
@@ -109,12 +135,17 @@ import BackButton from '@/components/account/button/BackButton';
 import { mapActions, mapGetters } from 'vuex';
 // eslint-disable-next-line import/extensions
 import MoneyAgregator from '@/components/account/Withdrawal/components/MoneyAgregator';
+import { isValid, regName, regNumbersOnly } from '@/store/regularExp';
 
 export default {
   name: 'Withdrawal',
 
   data: () => ({
+    cardNumber: '',
+    cardName: '',
     loading: false,
+    loading2: false,
+    loading3: false,
     deleteId: null,
     dialogVisible: false,
     checked: 0,
@@ -182,9 +213,22 @@ export default {
     },
     giveMeMoney() {
       // отправить запрос на бэк
+      this.loading3 = true;
+      setTimeout(() => {
+        this.loading3 = false;
+        this.dialogVisible = false;
+      }, 2000);
     },
     changeCard(e) {
       this.CurrentCard = this.CreditCards[e.target.value];
+    },
+    addCard() {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+        this.dialogVisible = false;
+      }, 2000);
+      // нужно сохранить карту на бэк!
     },
   },
 
@@ -195,6 +239,14 @@ export default {
     isCorrect() {
       return !!((this.Data[0].value || this.Data[1].value)
         && !this.Data[0].error && !this.Data[1].error);
+    },
+    isCorrectCard() {
+      console.log(isValid(this.cardName, 1, 64, regName));
+      if (isValid(this.cardName, 1, 64, regName)
+        && isValid(this.cardNumber, 15, 17, regNumbersOnly)) {
+        return true;
+      }
+      return false;
     },
     totalPrice() {
       if (this.Data[0].value && this.Data[1].value) {
@@ -280,7 +332,7 @@ export default {
     padding: 10px;
   }
   &__delete {
-    line-height: 20px;
+    line-height: 18px;
     font-weight: 700;
     font-size: 17px;
     text-align: center;
@@ -299,6 +351,26 @@ export default {
 
 .el-dialog__body {
   text-align: center;
+}
+.el-header {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.addNewCard {
+  margin: 25px 0;
+}
+.addNewCard {
+  &__forInputs {
+    padding: 0 20px;
+    margin-bottom: 35px;
+  }
+  &__input {
+    display: block;
+    border-bottom: 1px solid #E1E1E1;
+    width: 100%;
+    margin: 10px 0;
+  }
 }
 
 </style>

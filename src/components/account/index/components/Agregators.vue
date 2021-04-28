@@ -60,5 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
+.imgMiniAgregators {
+  cursor: pointer;
+}
 </style>
